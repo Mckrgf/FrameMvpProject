@@ -33,7 +33,7 @@ import javax.tools.Diagnostic;
  * on 2020/10/29
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@SupportedAnnotationTypes({ "com.supcon.module__apt.ApiFactory"})
+@SupportedAnnotationTypes({ "com.yaobing.module_apt.ApiFactory"})
 @AutoService(Processor.class)
 public class ApiFactoryProcessor  extends AbstractProcessor {
     @Override
@@ -77,10 +77,10 @@ public class ApiFactoryProcessor  extends AbstractProcessor {
                     }
 
                     if ("".equals(paramsString)) {
-                        methodBuilder.addStatement("return $T.getInstance().retrofit.create($T.class).$L().compose($T.io_main())", new Object[]{ClassName.get("com.supcon.module_middleware.network", "Api", new String[0]), ClassName.get(element), e.getSimpleName().toString(), ClassName.get("com.supcon.module_middleware.network", "RxSchedulers", new String[0])});
+                        methodBuilder.addStatement("return $T.getInstance().retrofit.create($T.class).$L().compose($T.io_main())", new Object[]{ClassName.get("com.yaobing.module_middleware.network", "Api", new String[0]), ClassName.get(element), e.getSimpleName().toString(), ClassName.get("com.yaobing.module_middleware.network", "RxSchedulers", new String[0])});
                         tb.addMethod(methodBuilder.build());
                     } else {
-                        methodBuilder.addStatement("return $T.getInstance().retrofit.create($T.class).$L($L).compose($T.io_main())", new Object[]{ClassName.get("com.supcon.module_middleware.network", "Api", new String[0]), ClassName.get(element), e.getSimpleName().toString(), paramsString.substring(0, paramsString.length() - 1), ClassName.get("com.supcon.module_middleware.network", "RxSchedulers", new String[0])});
+                        methodBuilder.addStatement("return $T.getInstance().retrofit.create($T.class).$L($L).compose($T.io_main())", new Object[]{ClassName.get("com.yaobing.module_middleware.network", "Api", new String[0]), ClassName.get(element), e.getSimpleName().toString(), paramsString.substring(0, paramsString.length() - 1), ClassName.get("com.yaobing.module_middleware.network", "RxSchedulers", new String[0])});
                         tb.addMethod(methodBuilder.build());
                     }
                 }
