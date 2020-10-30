@@ -40,7 +40,7 @@ import javax.tools.Diagnostic;
  * @desc :
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@SupportedAnnotationTypes({ "com.supcon.module__apt.ContractFactory"})
+@SupportedAnnotationTypes({ "com.yaobing.module_apt.ContractFactory"})
 @AutoService(Processor.class)
 public class ContractFactoryProcessor extends AbstractProcessor {
     @Override
@@ -91,7 +91,7 @@ public class ContractFactoryProcessor extends AbstractProcessor {
                 }
 
                 Builder tb = TypeSpec.interfaceBuilder(CLASS_NAME).addModifiers(new Modifier[]{Modifier.PUBLIC, Modifier.STATIC}).addJavadoc("@Contract created by apt\nzxcv\nadd by yaobing\n", new Object[0]);
-                Builder viewTb = TypeSpec.interfaceBuilder("View").addModifiers(new Modifier[]{Modifier.PUBLIC, Modifier.STATIC}).addSuperinterface(ClassName.get("com.supcon.common_view.contract", "IBaseView", new String[0])).addJavadoc("@View created by apt\n", new Object[0]);
+                Builder viewTb = TypeSpec.interfaceBuilder("View").addModifiers(new Modifier[]{Modifier.PUBLIC, Modifier.STATIC}).addSuperinterface(ClassName.get("com.yaobing.module_common_view.contract", "IBaseView", new String[0])).addJavadoc("@View created by apt\n", new Object[0]);
                 List<Element> enclosedMethods = new ArrayList();
                 enclosedMethods.addAll(element.getEnclosedElements());
                 int index = 0;
@@ -115,7 +115,7 @@ public class ContractFactoryProcessor extends AbstractProcessor {
                 }
 
                 tb.addType(viewTb.build());
-                Builder presenterTb = TypeSpec.classBuilder("Presenter").addModifiers(new Modifier[]{Modifier.PUBLIC, Modifier.STATIC, Modifier.ABSTRACT}).superclass(ParameterizedTypeName.get(ClassName.get("com.supcon.common_view.base.presenter", "BasePresenter", new String[0]), new TypeName[]{ClassName.get(CONTRACT_PATH, CLASS_NAME + ".View", new String[0])})).addSuperinterface(ClassName.get(API_PATH, element.getSimpleName().toString(), new String[0])).addJavadoc("@Presenter created by apt\n", new Object[0]);
+                Builder presenterTb = TypeSpec.classBuilder("Presenter").addModifiers(new Modifier[]{Modifier.PUBLIC, Modifier.STATIC, Modifier.ABSTRACT}).superclass(ParameterizedTypeName.get(ClassName.get("com.yaobing.module_common_view.base.presenter", "BasePresenter", new String[0]), new TypeName[]{ClassName.get(CONTRACT_PATH, CLASS_NAME + ".View", new String[0])})).addSuperinterface(ClassName.get(API_PATH, element.getSimpleName().toString(), new String[0])).addJavadoc("@Presenter created by apt\n", new Object[0]);
                 tb.addType(presenterTb.build());
                 if (CONTRACT_PATH == null) {
                     return true;
