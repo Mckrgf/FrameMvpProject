@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yaobing.module_middleware">
+
+    <application>
+        <activity android:name=".activity.BasePresenterActivity"></activity>
+        <activity android:name=".activity.BaseActivity" />
+    </application>
+
+</manifest>

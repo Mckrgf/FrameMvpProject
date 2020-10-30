@@ -1,0 +1,6 @@
+include ':module_common_view'
+include ':module_middleware'
+include ':module_apt'
+include ':module_compiler'
+include ':app'
+rootProject.name = "FrameMvpProject"
