@@ -1,0 +1,5 @@
+# FrameMvpProject
+框架
+需要在app目录下gradle设置java版本为1.8
+需要统一最低、最高android版本配置
+kotlin项目用kapt，java项目也建议添加kotlin插件
