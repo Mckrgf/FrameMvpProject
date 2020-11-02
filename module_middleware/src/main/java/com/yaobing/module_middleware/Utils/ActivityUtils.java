@@ -16,10 +16,11 @@
 
 package com.yaobing.module_middleware.Utils;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 

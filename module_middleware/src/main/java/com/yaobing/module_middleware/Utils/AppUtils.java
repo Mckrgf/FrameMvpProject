@@ -10,9 +10,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.PermissionChecker;
 import android.telephony.TelephonyManager;
-
-import androidx.core.content.PermissionChecker;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,8 +45,8 @@ public class AppUtils {
     public static String getAppIMEI(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService
                 (Context.TELEPHONY_SERVICE);
-        String IMEI = telephonyManager.getDeviceId();
-        return IMEI;
+//        String IMEI = telephonyManager.getDeviceId();
+        return "IMEI";
     }
 
     /**

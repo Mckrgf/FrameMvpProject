@@ -22,12 +22,12 @@ allprojects {
 }
 
 ext{
-    compileSdkVersion = 29
+    compileSdkVersion = 28
     buildToolsVersion = "28.0.3"
     applicationId = "com.yaobing.framenmvpproject"
 
     minSdkVersion = 19
-    targetSdkVersion = 29
+    targetSdkVersion = 28
     versionCode = 1 //2019/11/12 2020/04/22 2020/06/10
     versionName = "1.1.1"
     ProductCode = "5.1.0.1-200706-C" //V5.0.0.0-200103-C V5.0.0.1-200422-C

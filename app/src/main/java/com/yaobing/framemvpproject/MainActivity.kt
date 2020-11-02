@@ -1,12 +1,10 @@
 package com.yaobing.framemvpproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.yaobing.contract.GithubRepoContract
 import com.yaobing.module_apt.Presenter
 import com.yaobing.module_middleware.activity.BasePresenterActivity
-import com.yaobing.module_middleware.network.Api
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 @Presenter(value = [GithubRepoPresenter::class])
