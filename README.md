@@ -38,11 +38,18 @@ apply plugin: 'kotlin-kapt'
             mavenCentral() // add repository
             
 3.sync
+
 4.写一个接口，里面是你的网络请求方法。加注解contractfactory
+
 5.写一个接口，networkAPI。管理所有网络请求。用apifactory注解。
+
 6.build
+
 7.Presenter继承基类，实现相关方法。
+
 8.activity中增加注解presenter。实现契约类.view()方法
+
 9.实现逻辑
+
 
 
