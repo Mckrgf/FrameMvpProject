@@ -51,7 +51,9 @@ apply plugin: 'kotlin-kapt'
 
 9.实现逻辑
 
-IP设置：一律通过继承了BaseApp的application类来设置
+IP设置：一律通过继承了BaseApp的application类来设置。
+
+默认的ip地址为api.github.com。
 
 
 
