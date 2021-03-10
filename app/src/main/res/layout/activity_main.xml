@@ -11,4 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/bt_all"/>
 
+    <com.yaobing.module_middleware.js.BridgeWebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webview"/>
+
 </LinearLayout>

@@ -1,17 +1,17 @@
 package com.yaobing.module_middleware.Utils;
 
+import java.lang.reflect.Constructor;
+
 /**
- * @author : yaobing
- * @date : 2020/10/28 14:44
- * @desc :
+ * Created by yaobing on 16/4/30.
  */
 public class InstanceUtil {
+
     /**
      * 通过实例工厂去实例化相应类
      *
-     * @param clazz  返回实例的泛型类型
-     * @param <T> t
-     * @return 实例
+     * @param <T> 返回实例的泛型类型
+     * @return
      */
     public static <T> T getInstance(Class<T> clazz) {
         try {
@@ -25,5 +25,6 @@ public class InstanceUtil {
         }
         return null;
     }
+
 
 }

@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,13 +37,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Uri uriForFile;
     public String path;
     public File file;
-
+    protected View rootView;
+    protected Context context;
     public final int permissionRequestCode = 10001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onInit();
+        context = this;
+        rootView = LayoutInflater.from(this).inflate(getLayoutID(), null);
+        setContentView(rootView);
+        initView();
+        initListener();
+        initData();
         app = (BaseApp) getApp();
         app.addActivity(this);
         String activities = "";
@@ -49,8 +58,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             activities = activities + "\n" + ((BaseApp) getApp()).getActivitylists().get(i).toString();
         }
     }
+    protected abstract int getLayoutID();
     protected void onInit() {
 
+    }
+    protected void initView() {
+
+    }
+    protected void initListener() {
+
+    }
+    protected void initData() {
+
+    }
+
+    public void back() {
+        finish();
     }
 
     @Override

@@ -7,11 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * @author : yaobing
- * @date : 2020/10/29 9:36
- * @desc :
- */
 public class LogUtil {
     /**
      * 日志打印开关，开发与调试为true，在正式版发布时为false
@@ -25,7 +20,6 @@ public class LogUtil {
 
     /**
      * 获取日志开关
-     * @return boolean
      */
     public static boolean isShowlog() {
         return showLog;
@@ -33,7 +27,6 @@ public class LogUtil {
 
     /**
      * 打印出错堆栈信息
-     * @param e e
      */
     public static void showException(Exception e) {
         if (e == null) {
@@ -45,7 +38,6 @@ public class LogUtil {
 
     /**
      * 打印出错堆栈信息
-     * @param e e
      */
     public static void showException(OutOfMemoryError e) {
         if (e == null) {
@@ -107,7 +99,7 @@ public class LogUtil {
      * @param content 日志内容
      */
     public static void e(String tag, String content) {
-        Log.e(tag, content);
+            Log.e(tag, content);
     }
 
     /**
@@ -157,8 +149,6 @@ public class LogUtil {
 
     /**
      * 显示列表（int数组）
-     * @param list list
-     * @return string
      */
     public static String showIntArr(int[] list) {
         if (list == null) {
@@ -179,8 +169,6 @@ public class LogUtil {
 
     /**
      * 显示列表（byte数组）
-     * @param list  list
-     * @return string
      */
     public static String showByteArr(byte[] list) {
         if (list == null) {
@@ -201,8 +189,6 @@ public class LogUtil {
 
     /**
      * 显示列表（float数组）
-     * @param list  list
-     * @return String
      */
     public static String showFloatArr(float[] list) {
         if (list == null) {
@@ -273,7 +259,7 @@ public class LogUtil {
     /**
      * 显示时间（long转化为String）
      *
-     * @param time long
+     * @param time
      * @return 返回为"yyyy-MM-dd HH:mm:ss"格式的时间显示
      */
     public static String showTimeFromMilis(long time) {
@@ -283,7 +269,7 @@ public class LogUtil {
     /**
      * 显示时间（long转化为String）
      *
-     * @param time long
+     * @param time
      * @param formatStr 需要显示的时间格式，比如"yyyy-MM-dd HH:mm:ss"
      * @return 返回指定格式的时间显示
      */
@@ -305,8 +291,6 @@ public class LogUtil {
     public class MyLogArr<T> {
         /**
          * 显示列表（对象数组）
-         * @param list list
-         * @return string
          */
         public String showArr(T[] list) {
             if (list == null) {
@@ -327,8 +311,6 @@ public class LogUtil {
 
         /**
          * 显示列表
-         * @param list list
-         * @return str
          */
         public String showList(List<T> list) {
             if (list == null) {

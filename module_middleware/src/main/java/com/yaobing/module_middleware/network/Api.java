@@ -76,7 +76,7 @@ public class Api {
 //                .addInterceptor(headInterceptor == null?new HeadInterceptor():headInterceptor)
 //                .addInterceptor(new RedirectInterceptor())
 //                .addInterceptor(responseInterceptor==null?new LoginInterceptor():responseInterceptor)
-                .addInterceptor(logInterceptor)
+//                .addInterceptor(logInterceptor)
                 .cache(cache)
 //                .cookieJar(new LocalCookieJar())
 //                .hostnameVerifier(SSLSocketFactoryHelper.getInstance().getHostnameVerifier())
