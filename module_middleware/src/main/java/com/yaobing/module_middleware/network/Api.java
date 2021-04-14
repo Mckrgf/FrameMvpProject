@@ -1,6 +1,7 @@
 package com.yaobing.module_middleware.network;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,6 +9,8 @@ import com.yaobing.module_middleware.BaseApp;
 import com.yaobing.module_middleware.MiddleWareConstant;
 import com.yaobing.module_middleware.Utils.LogUtil;
 import com.yaobing.module_middleware.Utils.SharedPreferencesUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,7 +35,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Api {
     public Retrofit retrofit;
-    public ApiService service;
     private static Interceptor networkInterceptor;//自定义的网络拦截器，处理重定向
     private static Interceptor headInterceptor;//自定义的head拦截器，模块单独调试的时候用
     private static Interceptor responseInterceptor;//自定义的head拦截器，模块单独调试的时候用
@@ -57,6 +59,32 @@ public class Api {
     }
 
     private void build(){
+        //1.初始化okhttpclient
+        OkHttpClient okHttpClient = initOkHttpClientBuilder();
+
+        //2.初始化retrofit和service
+        Gson gson = new GsonBuilder().setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
+
+        boolean isUrlEnabled = SharedPreferencesUtils.getParam(BaseApp.getInstance(), MiddleWareConstant.SPKey.URL_ENABLE, false);
+
+        if(isUrlEnabled && TextUtils.isEmpty(BaseApp.getUrl()) || !isUrlEnabled && TextUtils.isEmpty(BaseApp.getIp())){
+            LogUtil.e("缓存的url或ip为空！");
+            BaseApp.setIp("api.github.com/");
+            BaseApp.setPort("");
+            SharedPreferencesUtils.setParam(BaseApp.getInstance(), MiddleWareConstant.SPKey.URL_ENABLE, false);
+        }
+
+        retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(getHost()/*isUrlEnabled?"http://"+MBapApp.getUrl()+"/":"http://"+ MBapApp.getIp()+":"+ MBapApp.getPort()+"/"*/)
+                .build();
+
+    }
+
+    @NotNull
+    private OkHttpClient initOkHttpClientBuilder() {
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
@@ -100,28 +128,7 @@ public class Api {
         if(networkInterceptor!=null){
             builder.addNetworkInterceptor(networkInterceptor);
         }
-
-
-        OkHttpClient okHttpClient = builder.build();
-
-        Gson gson = new GsonBuilder().setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
-
-        boolean isUrlEnabled = SharedPreferencesUtils.getParam(BaseApp.getInstance(), MiddleWareConstant.SPKey.URL_ENABLE, false);
-
-        if(isUrlEnabled && TextUtils.isEmpty(BaseApp.getUrl()) || !isUrlEnabled && TextUtils.isEmpty(BaseApp.getIp())){
-            LogUtil.e("缓存的url或ip为空！");
-            BaseApp.setIp("api.github.com/");
-            BaseApp.setPort("");
-            SharedPreferencesUtils.setParam(BaseApp.getInstance(), MiddleWareConstant.SPKey.URL_ENABLE, false);
-        }
-
-        retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(getHost()/*isUrlEnabled?"http://"+MBapApp.getUrl()+"/":"http://"+ MBapApp.getIp()+":"+ MBapApp.getPort()+"/"*/)
-                .build();
-        service = retrofit.create(ApiService.class);
+        return builder.build();
     }
 
     public static String getHost() {
