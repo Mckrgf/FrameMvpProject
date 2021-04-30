@@ -29,6 +29,13 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def createTime = new Date().format("YYMMdd", TimeZone.getTimeZone("GMT+08:00"))
+            outputFileName = "Aaaaa-" + "-${createTime}" + ".apk"
+        }
+    }
 }
 
 dependencies {
