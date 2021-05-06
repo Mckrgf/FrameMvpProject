@@ -22,6 +22,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('./platform.jks')
+            storePassword 'android'
+            keyAlias "platform"
+            keyPassword 'android'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        release {
+            storeFile file('./platform.jks')
+            storePassword 'android1'
+            keyAlias "platform"
+            keyPassword 'android1'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -33,7 +53,7 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             def createTime = new Date().format("YYMMdd", TimeZone.getTimeZone("GMT+08:00"))
-            outputFileName = "Aaaaa-" + "-${createTime}" + ".apk"
+            outputFileName = "Aaaaa-" + "-${createTime}"+"-" + variant.buildType.name + "11.apk"
         }
     }
 }
