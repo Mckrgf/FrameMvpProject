@@ -16,16 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
+    //签名配置，该代码块需要在buildTypes代码块之前，否则buildTypes会找不到相关参数
     signingConfigs {
-        keystore {
-
+        release  {
             storeFile file('./platform.jks')
             storePassword 'android'
             keyAlias "platform"
@@ -34,6 +27,21 @@ android {
             v2SigningEnabled true
         }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -45,8 +53,8 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            def createTime = new Date().format("YYMMdd", TimeZone.getTimeZone("GMT+08:00"))
-            outputFileName = "Aaaaa-" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
+            def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
+            outputFileName = "FrameMvpProject-" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
         }
     }
 }
