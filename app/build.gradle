@@ -16,7 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    //签名配置，该代码块需要在buildTypes代码块之前，否则buildTypes会找不到相关参数
     signingConfigs {
         release  {
             storeFile file('./platform.jks')
