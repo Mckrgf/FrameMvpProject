@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/module_apt" />
             <option value="$PROJECT_DIR$/module_common_view" />
             <option value="$PROJECT_DIR$/module_compiler" />
+            <option value="$PROJECT_DIR$/module_location" />
             <option value="$PROJECT_DIR$/module_middleware" />
           </set>
         </option>

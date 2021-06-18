@@ -1,3 +1,4 @@
+include ':module_location'
 include ':module_common_view'
 include ':module_middleware'
 include ':module_apt'
