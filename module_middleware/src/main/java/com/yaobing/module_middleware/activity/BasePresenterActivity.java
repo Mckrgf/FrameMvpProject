@@ -34,13 +34,6 @@ public class BasePresenterActivity extends BaseActivity {
                 for(Class presenter : presenters){
 
                     if(this instanceof IBaseView){
-
-//                        if(mPresenterRouter.hasPresenter(presenter)){
-//                            BasePresenter basePresenter = (BasePresenter) mPresenterRouter.getPresenter(presenter);
-//                            addPresenter(basePresenter);
-//                            LogUtil.d("presenter " + presenter.getName() + " got!");
-//                        }
-//                        else {
                         BasePresenter basePresenter = (BasePresenter) InstanceUtil.getInstance(presenter);
                         presenterRouter.register(basePresenter);
                         addPresenter(basePresenter);
