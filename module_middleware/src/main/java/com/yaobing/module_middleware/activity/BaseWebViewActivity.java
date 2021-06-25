@@ -94,7 +94,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         rightBtn = rootView.findViewWithTag("rightBtn");
 
         if(rightBtn!=null && hasRefresh) {
-            rightBtn.setImageResource(R.drawable.brvah_sample_footer_loading);
+            rightBtn.setImageResource(R.mipmap.ic_launcher);
             rightBtn.setVisibility(View.VISIBLE);
         }
 
