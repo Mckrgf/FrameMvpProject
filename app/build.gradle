@@ -53,7 +53,7 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
-            outputFileName = "FrameMvpProject-" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
+            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
         }
     }
 }
