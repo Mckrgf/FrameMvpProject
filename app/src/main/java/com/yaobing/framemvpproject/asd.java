@@ -16,6 +16,7 @@ import io.reactivex.FlowableSubscriber;
  * @desc :
  */
 public class asd {
+
     public static void main(String[] args) {
         Flowable.create(new FlowableOnSubscribe<Object>() {
                     @Override
