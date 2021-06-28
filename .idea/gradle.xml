@@ -12,13 +12,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/module_A" />
+            <option value="$PROJECT_DIR$/module_A/mylibrary" />
             <option value="$PROJECT_DIR$/module_apt" />
             <option value="$PROJECT_DIR$/module_common_view" />
             <option value="$PROJECT_DIR$/module_compiler" />
             <option value="$PROJECT_DIR$/module_middleware" />
-            <option value="$PROJECT_DIR$/module_test" />
-            <option value="$PROJECT_DIR$/module_test/module_test_001" />
-            <option value="$PROJECT_DIR$/module_test/module_test_002" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

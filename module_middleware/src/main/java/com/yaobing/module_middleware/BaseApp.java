@@ -42,6 +42,12 @@ public class BaseApp extends Application {
         Utils.init(this);
         CrashHandler.getInstance().init(this);
         Log.i(TAG, "当前的进程名字是：" + AppUtils.getCurProcessName(this));
+
+        initRouter();
+    }
+
+    private void initRouter() {
+        ModuleClassHelper.getInstance().setup();
     }
 
     //测试文件的输入输出（以流的方式）所使用的路径
