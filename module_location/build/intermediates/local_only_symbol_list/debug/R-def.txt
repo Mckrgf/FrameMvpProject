@@ -1,0 +1,5 @@
+R_DEF: Internal format may change without notice
+local
+id tv_tem
+layout activity_main
+layout layout_nitification

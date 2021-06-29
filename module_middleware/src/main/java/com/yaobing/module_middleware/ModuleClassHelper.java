@@ -40,8 +40,9 @@ public class ModuleClassHelper {
 
     private ModuleClassHelper() {
         for (String module : MODULES) {
+
             classPaths.add("com.yaobing.framemvpproject." + module + ".IntentRouter");
-            classPaths.add("com.yaobing.framemvpproject." + module + ".WidgetWapper");
+//            classPaths.add("com.yaobing.framemvpproject." + module + ".WidgetWapper");
         }
     }
 

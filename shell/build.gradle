@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        applicationId rootProject.ext.applicationId
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
+            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    List<String> modules = new ArrayList<>()
+
+    String[] folders = ["module_A"]
+    modules.addAll(includeModules(folders))
+    println("implementation +" + modules.size())
+
+    for(String module:modules){
+        println("implementationA "+module)
+
+        implementation findProject(module)
+    }
+}
+
+def includeModules(folders) {
+
+
+    Set<String> ignoreFolders = new HashSet<>()
+    ignoreFolders.add(".git")
+    ignoreFolders.add("libs")
+    ignoreFolders.add("build")
+    ignoreFolders.add("module_ble")
+    ignoreFolders.add("module_wom_ble")
+    //在这里添加要过滤的文件夹
+
+    List<String> modules = new ArrayList<>()
+    for(String folder:folders){
+        modules.addAll(getImplFiles(folder, ignoreFolders))
+    }
+    return modules;
+}
+
+def getImplFiles(gitFilePath, ignoreFolders) {
+    File folder = new File(gitFilePath)
+    List<String> modules = new ArrayList<>()
+    if (folder.exists()) {
+        File[] fileList = folder.listFiles()
+        if (fileList != null && fileList.size() > 0) {
+            for (File file:fileList) {
+                println("bbbbb "+file.path)
+                println("ccccc "+ignoreFolders.toString())
+                println("ddddd "+file.list())
+                if (file.isDirectory() && !(ignoreFolders.contains(file.name) || file.name.contains("plugin")) && file.list().contains("src")){
+                    println("aaaaa"+file.list().contains("src"))
+                    modules.add(':'+gitFilePath+':' + file.name)
+                }
+            }
+
+        }
+    }
+    return modules;
+
+}

@@ -1,4 +1,5 @@
-include ':module_A:mylibrary'
+include ':shell'
+include ':app'
 //include ':module_test:module_test_003'
 //include ':module_test:module_test_002'
 //include ':module_test:module_test_001'
@@ -6,5 +7,7 @@ include ':module_common_view'
 include ':module_middleware'
 include ':module_apt'
 include ':module_compiler'
-include ':app'
+
+include ':module_A:mylibrary'
+include ':module_b'
 rootProject.name = "FrameMvpProject"

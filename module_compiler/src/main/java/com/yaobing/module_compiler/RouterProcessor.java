@@ -226,7 +226,7 @@ public class RouterProcessor extends AbstractProcessor {
             tb.addMethod(proxyMethod.build());
             //2021.02.24 插件化逻辑 end
 
-            JavaFile javaFile = JavaFile.builder(PACKAGE_NAME, tb.build()).build();// 生成源代码
+            JavaFile javaFile = JavaFile.builder(PACKAGE_NAME+".a", tb.build()).build();// 生成源代码
             javaFile.writeTo(processingEnv.getFiler());// 在 app module/build/generated/source/apt 生成一份源代码
         } catch (FilerException e) {
             e.printStackTrace();
