@@ -1,3 +1,4 @@
+include ':module_A:mylibrary2'
 include ':shell'
 include ':app'
 //include ':module_test:module_test_003'
