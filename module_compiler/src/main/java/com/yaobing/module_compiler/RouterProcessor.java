@@ -93,13 +93,7 @@ public class RouterProcessor extends AbstractProcessor {
         blockBuilderGo.beginControlFlow("if(extra != null)");
         blockBuilderGo.addStatement("\tintent.putExtras(extra)");
         blockBuilderGo.endControlFlow();
-//        ClassName moduleManagerClass = ClassName.get("com.supcon.mes.plugin.util", "ModuleManager");
-//        blockBuilderGo.add("$T moduleManager =$T.getInstance();\n", moduleManagerClass, moduleManagerClass);
-//        blockBuilderGo.beginControlFlow("if(moduleManager.needProxy(context, name))");
-//        blockBuilderGo.addStatement("\tintent.putExtra(\"REMOTE_DEX_PATH\", moduleManager.getProxyModule(context, name))");
-//        blockBuilderGo.addStatement("\tproxyGo(context, name, intent)");
-//        blockBuilderGo.addStatement("\treturn");
-//        blockBuilderGo.endControlFlow();
+
         blockBuilderGo.beginControlFlow(" switch (name)");//括号开始
 
         List<RouterActivityModel> mRouterActivityModels = new ArrayList<>();
