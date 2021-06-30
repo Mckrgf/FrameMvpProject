@@ -69,17 +69,13 @@ dependencies {
     String[] folders = ["module_A"]
     modules.addAll(includeModules(folders))
     println("implementation +" + modules.size())
-
     for(String module:modules){
         println("implementationA "+module)
-
         implementation findProject(module)
     }
 }
 
 def includeModules(folders) {
-
-
     Set<String> ignoreFolders = new HashSet<>()
     ignoreFolders.add(".git")
     ignoreFolders.add("libs")

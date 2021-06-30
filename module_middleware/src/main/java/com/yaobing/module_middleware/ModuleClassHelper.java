@@ -21,7 +21,7 @@ public class ModuleClassHelper {
      * 在这里设置模块名，未设置的模块这些资源不会导入
      */
     private static final String[] MODULES = {
-            "module_middleware","mylibrary","app"
+            "module_middleware","mylibrary","mylibrary2","app"
 
 
     };

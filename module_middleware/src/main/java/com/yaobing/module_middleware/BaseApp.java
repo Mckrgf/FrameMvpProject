@@ -48,19 +48,6 @@ public class BaseApp extends Application {
 
     private void initRouter() {
         ModuleClassHelper.getInstance().setup();
-
-        try {
-            Class.forName("com.yaobing.framemvpproject.mylibrary2.IntentRouter");
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Class.forName("com.yaobing.framemvpproject.mylibrary.IntentRouter");
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     //测试文件的输入输出（以流的方式）所使用的路径

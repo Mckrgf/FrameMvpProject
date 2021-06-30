@@ -56,4 +56,14 @@ IP设置：一律通过继承了BaseApp的application类来设置。
 默认的ip地址为api.github.com。
 
 
+--------------------------------------------------------模块化的文档。
+1.新增其他的子模块库（比如module_A）,可以通过git submodule命令来集成，此时库里是空的
+2.在根目录下新建module
+3.module挪到子模块里，setting.gradle也要修改.
+4.壳工程的gradle里，需要在folder的列表中新增子模块库的名字，gradle在编译的时候会获取该库下所有module并进行依赖。
+5.module级别的gradle依赖apt、middleware等项目，并统一sdk等参数的版本
+6.middleware的ModuleClassHelper中增加新增的module的名字，为了IntentRouter的加载。
+
+然后就可以愉快的进行开发了
+
 
