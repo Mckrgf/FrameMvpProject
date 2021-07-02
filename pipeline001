@@ -15,14 +15,12 @@ pipeline {
         stage('获取代码') {
             steps {
                 git 'https://github.com/Mckrgf/FrameMvpProject.git'
-                git 'https://github.com/Mckrgf/test.git'
-
+                git submodule add 'https://github.com/Mckrgf/module_A.git'
                 // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
             }
         }
         stage('module_A模块') {
             steps {
-                git submodule add 'https://github.com/Mckrgf/module_A.git'
                 git submodule update --init --recursive
             }
         }
