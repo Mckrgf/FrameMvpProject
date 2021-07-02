@@ -20,9 +20,8 @@ pipeline {
         }
         stage('module_AÄ£¿é') {
             steps {
-                script {
                     git submodule update --init --recursive
-                }
+
             }
         }
         stage('±àÒë´ò°ü') {
