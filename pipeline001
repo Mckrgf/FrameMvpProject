@@ -14,9 +14,9 @@ pipeline {
         }
         stage('获取代码') {
             steps {
-                // https://github.com/Mckrgf/FrameMvpProject/
-                // Get some code from a GitHub repository
                 git 'https://github.com/Mckrgf/FrameMvpProject.git'
+                git 'https://github.com/Mckrgf/test.git'
+
                 // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
             }
         }
@@ -25,12 +25,6 @@ pipeline {
                 git 'https://github.com/Mckrgf/module_A.git'
             }
         }
-        stage('G1ean1') {
-            steps {
-                bat 'echo ssssssssss'
-            }
-        }
-
         stage('编译打包') {
             steps {
                 bat 'gradle assembleRelease'
