@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        gradle "6.1.1.1"
+    }
+
+    stages {
+        stage('测试参数化构建') {
+            steps {
+                bat 'echo $branch'
+            }
+        }
+        stage('获取代码') {
+            steps {
+                // https://github.com/Mckrgf/FrameMvpProject/
+                // Get some code from a GitHub repository
+                git 'https://github.com/Mckrgf/FrameMvpProject.git'
+                // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
+            }
+        }
+        stage('G1ean1') {
+            steps {
+                bat 'echo ssssssssss'
+            }
+        }
+
+        stage('编译打包') {
+            steps {
+                bat 'gradle assembleRelease'
+            }
+        }
+        stage('获取apk') {
+            steps {
+                archiveArtifacts 'shell/build/outputs/apk/release/*.apk'
+            }
+        }
+    }
+}
