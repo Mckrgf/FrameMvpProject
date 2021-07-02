@@ -20,6 +20,11 @@ pipeline {
                 // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
             }
         }
+        stage('module_AÄ£¿é') {
+            steps {
+                git 'https://github.com/Mckrgf/module_A.git'
+            }
+        }
         stage('G1ean1') {
             steps {
                 bat 'echo ssssssssss'
