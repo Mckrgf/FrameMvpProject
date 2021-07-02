@@ -15,7 +15,6 @@ pipeline {
         stage('ЛёШЁДњТы') {
             steps {
                 git 'https://github.com/Mckrgf/FrameMvpProject.git'
-                git submodule add 'https://github.com/Mckrgf/module_A.git'
                 // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
             }
         }
