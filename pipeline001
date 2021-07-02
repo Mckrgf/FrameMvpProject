@@ -18,12 +18,7 @@ pipeline {
                 // git branch: "$branch", url: 'https://github.com/Mckrgf/FrameMvpProject.git'
             }
         }
-        stage('module_AÄ£¿é') {
-            steps {
-                    git submodule update --init --recursive
 
-            }
-        }
         stage('±àÒë´ò°ü') {
             steps {
                 bat 'gradle assembleRelease'
