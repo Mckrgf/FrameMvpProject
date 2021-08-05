@@ -16,6 +16,7 @@ import com.yaobing.module_middleware.activity.BasePresenterActivity
 import com.yaobing.module_middleware.interfaces.PermissionListener
 import com.yaobing.module_middleware.service.HWLocationSubmitService
 import com.yaobing.module_middleware.service.LocationSubmitService
+import com.yaobing.module_middleware.service.StopCheckService
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -112,6 +113,13 @@ class MainActivity : BasePresenterActivity(), GithubRepoContract.View {
         }
         bt_stop_service.setOnClickListener {
             stopService(Intent(this, HWLocationSubmitService::class.java))
+        }
+        bt_start_service1.setOnClickListener {
+            val intent = Intent(this, StopCheckService::class.java)
+            startService(intent)
+        }
+        bt_stop_service1.setOnClickListener {
+            stopService(Intent(this, StopCheckService::class.java))
         }
     }
 

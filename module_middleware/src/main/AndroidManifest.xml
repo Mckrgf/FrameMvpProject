@@ -35,6 +35,7 @@
         <activity android:name=".activity.BaseActivity" />
         <service android:name=".service.LocationSubmitService"/>
         <service android:name=".service.HWLocationSubmitService"/>
+        <service android:name=".service.StopCheckService"/>
     </application>
 
 </manifest>
