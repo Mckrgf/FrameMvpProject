@@ -12,10 +12,12 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
+        python {
+            // 指定python路径
+            buildPython "C:\\Users\\yaobing\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
+        }
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'

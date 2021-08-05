@@ -39,8 +39,8 @@ public class StopCheckService extends Service implements SensorEventListener {
             public void run() {
                 if (!Python.isStarted()) {
                     Python.start(new AndroidPlatform(StopCheckService.this));
-                    py = Python.getInstance();
                 }
+                py = Python.getInstance();
             }
         }).start();
     }
@@ -58,6 +58,14 @@ public class StopCheckService extends Service implements SensorEventListener {
                 }
             }
 
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (null != sensorManager) {
+            sensorManager.unregisterListener(this);
         }
     }
 

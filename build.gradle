@@ -33,7 +33,7 @@ allprojects {
 ext{
     compileSdkVersion = 28
     buildToolsVersion = "28.0.3"
-    applicationId = "com.yaobing.framenmvpproject"
+    applicationId = "com.fruitbasket.audioplatform"
 
     minSdkVersion = 19
     targetSdkVersion = 28
