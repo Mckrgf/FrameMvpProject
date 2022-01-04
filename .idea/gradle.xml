@@ -20,6 +20,8 @@
             <option value="$PROJECT_DIR$/module_common_view" />
             <option value="$PROJECT_DIR$/module_compiler" />
             <option value="$PROJECT_DIR$/module_middleware" />
+            <option value="$PROJECT_DIR$/module_view" />
+            <option value="$PROJECT_DIR$/module_view/moduel_myview" />
             <option value="$PROJECT_DIR$/shell" />
           </set>
         </option>

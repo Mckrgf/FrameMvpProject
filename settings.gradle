@@ -7,8 +7,10 @@ include ':app'
 include ':module_common_view'
 include ':module_middleware'
 include ':module_apt'
+include ':module_view'
 include ':module_compiler'
 
 include ':module_A:mylibrary'
 include ':module_b'
 rootProject.name = "FrameMvpProject"
+include ':module_view:moduel_myview'
