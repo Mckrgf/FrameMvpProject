@@ -3,4 +3,4 @@
 	url = git@github.com:Mckrgf/module_A.git
 [submodule "module_base"]
 	path = module_base
-	url = git@github.com:Mckrgf/FrameMvpProject.git
+	url = git@github.com:Mckrgf/module_base.git
