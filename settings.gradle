@@ -1,11 +1,11 @@
 rootProject.name = "FrameMvpProject"
-include ':module_base:module_network'
-include ':module_base:module_view'
-include ':module_A:mylibrary2'
-include ':shell'
-include ':app'
-include ':module_common_view'
+include ':module_base:module_network'//网络
+include ':module_base:module_view'//基类activity
+include ':module_base:module_apt'//注解
+include ':module_base:module_compiler'//注解
+include ':module_A:mylibrary'//测试用
+include ':module_A:mylibrary2'//测试用
+include ':shell'//测试跳转用
+include ':app'//测试接口用
+include ':module_common_view'//接口相关，以后可以弃用了，用注解生成的话更快更方便
 include ':module_middleware'
-include ':module_apt'
-include ':module_compiler'
-include ':module_A:mylibrary'
