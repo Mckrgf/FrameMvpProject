@@ -15,8 +15,10 @@
             <option value="$PROJECT_DIR$/module_A" />
             <option value="$PROJECT_DIR$/module_A/mylibrary" />
             <option value="$PROJECT_DIR$/module_A/mylibrary2" />
-            <option value="$PROJECT_DIR$/module_apt" />
             <option value="$PROJECT_DIR$/module_b" />
+            <option value="$PROJECT_DIR$/module_base" />
+            <option value="$PROJECT_DIR$/module_base/module_apt" />
+            <option value="$PROJECT_DIR$/module_base/module_compiler" />
             <option value="$PROJECT_DIR$/module_common_view" />
             <option value="$PROJECT_DIR$/module_compiler" />
             <option value="$PROJECT_DIR$/module_middleware" />
@@ -25,7 +27,6 @@
             <option value="$PROJECT_DIR$/shell" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
