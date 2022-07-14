@@ -64,6 +64,6 @@ dependencies {
 
     implementation project(':module_middleware')
     api project(path: ':module_common_view')
-    implementation project(path: ':module_apt')
-    kapt project(path: ':module_compiler')
+    implementation project(path: ':module_base:module_apt')
+    kapt project(path: ':module_base:module_compiler')
 }

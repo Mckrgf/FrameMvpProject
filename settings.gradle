@@ -1,16 +1,19 @@
 include ':module_A:mylibrary2'
 include ':shell'
 include ':app'
+include ':module_base:module_apt'
+include ':module_base:module_compiler'
 //include ':module_test:module_test_003'
 //include ':module_test:module_test_002'
 //include ':module_test:module_test_001'
 include ':module_common_view'
 include ':module_middleware'
-include ':module_apt'
+//include ':module_apt'
 include ':module_view'
 include ':module_compiler'
 
 include ':module_A:mylibrary'
 include ':module_b'
+
 rootProject.name = "FrameMvpProject"
 include ':module_view:moduel_myview'
