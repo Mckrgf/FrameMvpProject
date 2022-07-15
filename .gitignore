@@ -16,3 +16,4 @@
 .idea
 /.idea
 /.gradle/
+.module_apt
