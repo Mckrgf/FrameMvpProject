@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.yaobing.module_middleware.BaseApp;
+import com.yaobing.module_middleware.Utils.ViewBinder;
 import com.yaobing.module_middleware.interfaces.PermissionListener;
 
 import java.io.File;
@@ -60,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     protected abstract int getLayoutID();
     protected void onInit() {
-
+        ViewBinder.bindTag(this);
     }
     protected void initView() {
 
