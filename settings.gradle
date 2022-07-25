@@ -10,7 +10,7 @@ include ':module_A:mylibrary'
 include ':module_b'
 
 rootProject.name = "FrameMvpProject"
-include ':module_view:moduel_myview'
+include ':module_view:moduel_myview'//test测试家里pc的用户名
 //include ':module_test:module_test_003'
 //include ':module_test:module_test_002'
 //include ':module_test:module_test_001'
