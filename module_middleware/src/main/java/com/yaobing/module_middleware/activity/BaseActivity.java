@@ -45,10 +45,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onInit();
         context = this;
         rootView = LayoutInflater.from(this).inflate(getLayoutID(), null);
         setContentView(rootView);
+        onInit();
         initView();
         initListener();
         initData();
