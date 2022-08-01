@@ -1,6 +1,7 @@
 package com.yaobing.module_middleware
 
 import android.content.Intent
+import android.util.Log
 
 /**
  * @author : yaobing
@@ -9,12 +10,10 @@ import android.content.Intent
  */
 class LifeCycleManage<T : Lifecycle> :Lifecycle {
 
-    lateinit var lifecycleMap:MutableMap<String,T>
+    var lifecycleMap:MutableMap<String,T> = HashMap()
 
 
-    constructor() {
-        lifecycleMap = HashMap()
-    }
+    constructor()
 
     fun  getLifeCycleMap() :Map<String,T>? {
         return if (null == lifecycleMap) {
@@ -28,51 +27,73 @@ class LifeCycleManage<T : Lifecycle> :Lifecycle {
         lifecycleMap!![key] = lifecycle
     }
 
-    fun unRegister(key:String) {
+    fun unregister(key:String) {
         lifecycleMap?.remove(key)
     }
 
     override fun onInit() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onInit()
+        }
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.initView()
+        }
     }
 
     override fun initListener() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.initListener()
+        }
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.initData()
+        }
     }
 
     override fun onStart() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onStart()
+        }
     }
 
     override fun onStop() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onStop()
+        }
     }
 
     override fun onResume() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onResume()
+        }
     }
 
     override fun onPause() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onPause()
+        }
     }
 
     override fun onDestroy() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onDestroy()
+        }
     }
 
     override fun onRetry() {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onRetry()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        TODO("Not yet implemented")
+        for ((a, value) in lifecycleMap.entries) {
+            value.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
