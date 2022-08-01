@@ -5,6 +5,8 @@ import android.util.Log
 import com.yaobing.framemvpproject.contract.GithubRepoContract
 import com.yaobing.module_apt.Presenter
 import com.yaobing.module_apt.Router
+import com.yaobing.module_middleware.Utils.ToastUtil
+import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BasePresenterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -35,9 +37,11 @@ class MainActivity : BasePresenterActivity() , GithubRepoContract.View{
 
     override fun getAllRepoByNameFailed(errorMsg: String?) {
         Log.d("zxcv","a")
+        ToastUtils.show(context,errorMsg)
     }
 
     override fun getAllRepoByNameSuccess(entity: ArrayList<*>?) {
+        ToastUtils.show(context,entity.toString())
         Log.d("zxcv","b")
     }
 }
