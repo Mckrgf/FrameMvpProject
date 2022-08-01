@@ -10,7 +10,9 @@ import com.yaobing.module_middleware.Utils.InstanceUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class BasePresenterActivity extends BaseActivity {
 
@@ -29,6 +31,7 @@ public abstract class BasePresenterActivity extends BaseActivity {
     private List<BasePresenter> mPresenters = new ArrayList<>();
 
     protected void initPresenter() {
+        Map  a = new HashMap();
         presenterRouter = new PresenterRouter();
         Annotation[] annotations = getClass().getAnnotations();
         for (Annotation annotation:annotations){
