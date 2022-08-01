@@ -123,4 +123,38 @@ abstract class BaseControllerActivity : BasePresenterActivity() {
 
     //------------------------------------生命周期绑定结束
 
+    override fun refresh() {
+        super.refresh()
+        for (entry in controllers.lifecycleMap.entries) {
+            entry.value.refresh()
+        }
+    }
+
+    override fun checkBeforeSubmit(map: Map<String?, Any?>?): Boolean {
+        for (entry in controllers.lifecycleMap.entries) {
+            if (!entry.value.checkBeforeSubmit(map)) {
+                return false
+            }
+        }
+        return super.checkBeforeSubmit(map)
+    }
+
+    override fun doSave(map: Map<String?, Any?>?): Boolean {
+        for (entry in controllers.lifecycleMap.entries) {
+            if (!entry.value.doSave(map)) {
+                return false
+            }
+        }
+        return super.doSave(map)
+    }
+
+    override fun isModified(): Boolean {
+        for (entry in controllers.lifecycleMap.entries) {
+            if (entry.value.isModified()) {
+                return true
+            }
+        }
+        return super.isModified()
+    }
+
 }
