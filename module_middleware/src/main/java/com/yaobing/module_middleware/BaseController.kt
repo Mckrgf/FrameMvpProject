@@ -7,7 +7,7 @@ import android.content.Intent
  * @date   : 2022/08/01 14:46
  * @desc   : 要求所有子类controller都要继承baseController的生命周期，便于管控，防止内存泄漏之类的
  */
-class BaseController : Lifecycle,IData {
+open class BaseController : Lifecycle,IData {
 
 
     //为controller绑定的context所在。比如activity/fragment
