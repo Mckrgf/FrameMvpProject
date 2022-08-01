@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.yaobing.module_middleware.BaseApp;
+import com.yaobing.module_middleware.IData;
 import com.yaobing.module_middleware.Utils.ViewBinder;
 import com.yaobing.module_middleware.interfaces.PermissionListener;
 
@@ -27,12 +28,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IData {
 
     private BaseApp app;
     public Uri uriForFile;
@@ -221,5 +223,47 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
         }
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void refresh() {
+
+    }
+    @Override
+    public boolean checkBeforeSubmit(Map<String, ? extends Object> map) {
+        return doSave(map);
+    }
+
+    @Override
+    public boolean doSave(Map<String, ? extends Object> map) {
+        return true;
+    }
+
+    @Override
+    public boolean isModified() {
+        return false;
+    }
 }

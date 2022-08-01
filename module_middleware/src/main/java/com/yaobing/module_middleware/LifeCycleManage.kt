@@ -1,7 +1,6 @@
 package com.yaobing.module_middleware
 
 import android.content.Intent
-import android.util.Log
 
 /**
  * @author : yaobing
@@ -95,5 +94,9 @@ class LifeCycleManage<T : Lifecycle> :Lifecycle {
         for ((a, value) in lifecycleMap.entries) {
             value.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    operator fun get(key: String?): T? {
+        return lifecycleMap[key]
     }
 }
