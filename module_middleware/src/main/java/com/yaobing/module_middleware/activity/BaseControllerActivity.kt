@@ -41,7 +41,9 @@ abstract class BaseControllerActivity : BasePresenterActivity() {
                             }
                         }
                         baseController?.setTarget(context)
-                        registerController(controllerClass::class.java.simpleName, baseController!!)
+                        val a = controllerClass::class.java.simpleName
+                        val b = controllerClass.java.simpleName
+                        registerController(controllerClass.java.simpleName, baseController!!)
                     }
                 }
             }
