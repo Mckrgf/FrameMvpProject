@@ -11,7 +11,7 @@ import java.util.Map;
  * @date : 2020/10/27 17:02
  * @desc :
  */
-public class PresenterRouter implements InvocationHandler {
+public class TestRouter implements InvocationHandler {
     private Map<String, Object> mPresenterMap = new HashMap<>();
 
 //    private static class PresenterRouterHolder{
@@ -23,37 +23,6 @@ public class PresenterRouter implements InvocationHandler {
 //
 //        return PresenterRouterHolder.instance;
 //    }
-
-    public PresenterRouter() {
-    }
-
-
-    public <T> T getPresenter(Class<T> clazz){
-
-        Class<?>[] interfaces = clazz.getSuperclass().getInterfaces();
-
-        if(interfaces == null || interfaces.length ==0){
-            return null;
-        }
-
-        if(mPresenterMap.containsKey(interfaces[0].getName())){
-            return (T) mPresenterMap.get(interfaces[0].getName());
-        }
-
-        return null;
-    }
-
-    public <T> boolean hasPresenter(Class<T> clazz){
-
-        Class<?>[] interfaces = clazz.getSuperclass().getInterfaces();
-
-        if(interfaces == null || interfaces.length ==0){
-            return false;
-        }
-
-
-        return mPresenterMap.containsKey(interfaces[0].getName());
-    }
 
     /**
      * 注册一个服务，提供给业务层使用

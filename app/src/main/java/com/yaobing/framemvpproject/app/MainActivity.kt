@@ -7,10 +7,11 @@ import com.yaobing.framemvpproject.contract.GithubRepoContract
 import com.yaobing.module_apt.Controller
 import com.yaobing.module_apt.Presenter
 import com.yaobing.module_apt.Router
-import com.yaobing.module_middleware.Utils.ToastUtil
+import com.yaobing.module_common_view.base.presenter.BasePresenter
+import com.yaobing.module_middleware.TestRouter
+import com.yaobing.module_middleware.Utils.InstanceUtil
 import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BaseControllerActivity
-import com.yaobing.module_middleware.activity.BasePresenterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -22,6 +23,10 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
         super.onCreate(savedInstanceState)
         bt_all.setOnClickListener {
             presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
+            val a = TestRouter()
+            val c = InstanceUtil.getInstance((AAA::class as Any).javaClass)
+            a.register(c)
+            a.create(TestAPI:: class.java).testFun("MCKRGF")
         }
         bt_over_module.setOnClickListener {
 
