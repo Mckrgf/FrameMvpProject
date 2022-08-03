@@ -6,6 +6,9 @@ import android.view.View;
 
 import com.yaobing.module_apt.Bind;
 import com.yaobing.module_apt.BindByTag;
+import com.yaobing.module_apt.BindByTagA;
+import com.yaobing.module_apt.BindByTagB;
+import com.yaobing.module_apt.BindByTagC;
 import com.yaobing.module_apt.custom.OnChild;
 import com.yaobing.module_apt.custom.OnItemChild;
 
@@ -44,6 +47,10 @@ public class ViewBinder {
                         field.set(target, source.findViewById(viewId));
                         continue;
                     }
+                    //前两个注解的策略是source和class.在field获取annotation是获取不到的.第三个注解的策略是runtime,可以在运行时被获取到.
+                    BindByTagA bindByTagA = field.getAnnotation(BindByTagA.class);//RetentionPolicy.SOURCE
+                    BindByTagB bindByTagB = field.getAnnotation(BindByTagB.class);//RetentionPolicy.CLASS
+                    BindByTagC bindByTagC = field.getAnnotation(BindByTagC.class);//RetentionPolicy.RUNTIME
 
                     BindByTag bindByTag = field.getAnnotation(BindByTag.class);
                     if (bindByTag != null) {
