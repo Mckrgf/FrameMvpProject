@@ -61,8 +61,9 @@ public class PresenterRouter implements InvocationHandler {
      * @param presenter
      */
     public void register(Object presenter){
-
-        Class<?>[] interfaces = presenter.getClass().getSuperclass().getInterfaces();
+        Class a = presenter.getClass();
+        Class b = a.getSuperclass();
+        Class<?>[] interfaces = b.getInterfaces();
 
         if(interfaces == null ||  interfaces.length ==0){
             return;
@@ -113,6 +114,19 @@ public class PresenterRouter implements InvocationHandler {
                 this);
         return a;
     }
+    public <T> T createA(final Class<T> presenter) {
+        ClassLoader a = presenter.getClassLoader();
+        Class[] b = new Class<?>[] { presenter };
+        T c = (T) Proxy.newProxyInstance(a, b,
+                new InvocationHandler() {
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        return null;
+                    }
+                });
+        return c;
+    }
+
 
 
 }

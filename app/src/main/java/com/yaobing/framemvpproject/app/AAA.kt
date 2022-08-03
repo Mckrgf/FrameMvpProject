@@ -9,9 +9,9 @@ import com.yaobing.module_common_view.base.presenter.BasePresenter
  * @date   : 2020/10/30 15:50
  * @desc   :
  */
-class AAA : TestAPI {
+open class AAA : TestAPI {
     override fun testFun(name: String?) {
-        Log.d("zxcv","dfdf")
+        Log.d("zxcv","dfdfAAa")
     }
 
 

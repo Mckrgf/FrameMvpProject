@@ -30,8 +30,9 @@ public class TestRouter implements InvocationHandler {
      * @param presenter
      */
     public void register(Object presenter){
-
-        Class<?>[] interfaces = presenter.getClass().getSuperclass().getInterfaces();
+        Class a = presenter.getClass();
+        Class b = a.getSuperclass();
+        Class<?>[] interfaces = b.getInterfaces();
 
         if(interfaces == null ||  interfaces.length ==0){
             return;
@@ -51,7 +52,7 @@ public class TestRouter implements InvocationHandler {
      */
     public void unRegister(Object presenter){
 
-        Class<?>[] interfaces = presenter.getClass().getSuperclass().getInterfaces();
+        Class<?>[] interfaces = presenter.getClass().getInterfaces();
 
         if(interfaces == null && interfaces.length ==0){
             return;
