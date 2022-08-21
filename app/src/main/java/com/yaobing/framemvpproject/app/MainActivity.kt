@@ -24,19 +24,27 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bt_all.setOnClickListener {
-            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
+            //为了测试动态代理方便，先注释掉
+//            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
 
-            val testRouter = TestRouter()
-            testRouter.register(BBB())
-            testRouter.create(TestAPI:: class.java).testFun("AAA")
-//            presenterRouter.createB(TestAPI:: class.java,AAA:: class.java).testFun("BBB")
-//            proxyTest()
+            val testRouterA = TestRouter()
+            val obj = AAA()
+            testRouterA.register(obj)
+            val a = testRouterA.create(TestAPI:: class.java)
+            a.testFun("AAA")
+
+
         }
         bt_over_module.setOnClickListener {
 
+            val testRouterB = TestRouter()
+            val obj1 = BBB()
+            testRouterB.register(obj1)
+            val b = testRouterB.create(TestAPI:: class.java)
+            b.testFun("BBB")
 
-
-            IntentRouter.go(this, "asdf")
+//为了测试动态代理方便，先注释掉
+//            IntentRouter.go(this, "asdf")
         }
         initWebView()
     }

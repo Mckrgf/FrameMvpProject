@@ -4,13 +4,12 @@ import android.util.Log
 
 /**
  * @author : yaobing
- * @date   : 2020/10/30 15:50
- * @desc   :
+ * @date : 2022/08/03 15:05
+ * @desc :
  */
-open class AAA : TestAPI {
+open class BBB : AAA() {
     override fun testFun(name: String?) {
-        Log.d("zxcv","dfdfAAa")
+        super.testFun(name)
+        Log.d("zxcv", "dfdfBBB")
     }
-
-
 }
