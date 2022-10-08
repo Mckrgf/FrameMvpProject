@@ -16,10 +16,10 @@ import java.util.Map;
 
 public abstract class BasePresenterActivity extends BaseActivity {
 
-    @Override
-    protected int getLayoutID() {
-        return 0;
-    }
+//    @Override
+//    protected int getLayoutID() {
+//        return 0;
+//    }
 
     @Override
     protected void onInit() {
