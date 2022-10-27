@@ -1,16 +1,24 @@
-include ':module_A:mylibrary2'
-include ':shell'
+rootProject.name = "FrameMvpProject"
+
 include ':app'
-include ':module_base:module_apt'
-include ':module_base:module_compiler'
-include ':module_common_view'
-include ':module_middleware'
-include ':module_view'
+
+include ':module_A:mylibrary2'
 include ':module_A:mylibrary'
+
 include ':module_b'
 
-rootProject.name = "FrameMvpProject"
-include ':module_view:moduel_myview'//test测试家里pc的用户名
+include ':module_base:module_apt'
+include ':module_base:module_compiler'
+
+include ':module_common_view'
+
+include ':module_middleware'
+
+include ':shell'
+
+
+
+//include ':module_view:moduel_myview'//test测试家里pc的用户名
 //include ':module_test:module_test_003'
 //include ':module_test:module_test_002'
 //include ':module_test:module_test_001'
