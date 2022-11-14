@@ -19,13 +19,6 @@ fun String.checkComma(): String {
     }
 }
 
-class Person {
-    var age: Int = 1
-
-    constructor(age: Int) {
-        this.age = age
-    }
-}
 var EditText.isBold :Boolean
     get() {
         return this.paint.isFakeBoldText
@@ -34,7 +27,14 @@ var EditText.isBold :Boolean
         this.paint.isFakeBoldText = value
     }
 
+class Person {
+    var age: Int = 1
 
+    constructor(age: Int) {
+        this.age = age
+    }
+}
+// TODO: 会有递归错误，要研究一下
 var String.aaa: Int
     get() {
        return this.aaa
