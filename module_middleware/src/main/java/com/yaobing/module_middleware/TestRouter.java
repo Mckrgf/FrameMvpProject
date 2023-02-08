@@ -32,7 +32,7 @@ public class TestRouter implements InvocationHandler {
     public void register(Object presenter){
         Class a = presenter.getClass();
         Class b = a.getSuperclass();
-        Class<?>[] interfaces = b.getInterfaces();
+        Class<?>[] interfaces = a.getInterfaces();
 
         if(interfaces == null ||  interfaces.length ==0){
             return;

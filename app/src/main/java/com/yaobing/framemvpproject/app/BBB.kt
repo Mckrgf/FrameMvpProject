@@ -7,7 +7,7 @@ import android.util.Log
  * @date : 2022/08/03 15:05
  * @desc :
  */
-open class BBB : AAA() {
+open class BBB : AAA(),TestAPI {
     override fun testFun(name: String?) {
         super.testFun(name)
         Log.d("zxcv", "dfdfBBB")
