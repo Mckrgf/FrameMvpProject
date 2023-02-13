@@ -70,10 +70,12 @@ dependencies {
 
     //可能module如果直接暴露在根目录下（如app），则用代码的方式来动态依赖是无效的？IntentRouter跳转的时候找不到。准备直接依赖试试
     implementation project(path: ':app')
+    implementation project(path: ':module_b')
 
-    String[] folders = ["module_A","app"]
+    String[] folders = ["module_A"]
     modules.addAll(includeModules(folders))
     for(String module:modules){
+        println("动态依赖了： "+module)
         implementation findProject(module)
     }
 }

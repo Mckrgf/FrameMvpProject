@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.yaobing.module_apt.Router;
+
+@Router("TestCActivity")
 public class TestCActivity extends AppCompatActivity {
 
     @Override
