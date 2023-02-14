@@ -25,7 +25,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
         super.onCreate(savedInstanceState)
         bt_all.setOnClickListener {
             //为了测试动态代理方便，先注释掉
-//            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
+            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
 
             val testRouterA = TestRouter()
             val obj = AAA()
@@ -44,7 +44,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
             b.testFun("BBB")
 
 //为了测试动态代理方便，先注释掉
-//            IntentRouter.go(this, "asdf")
+            IntentRouter.go(this, "asdf")
         }
         initWebView()
     }
