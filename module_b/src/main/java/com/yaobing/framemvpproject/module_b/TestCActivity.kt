@@ -21,12 +21,37 @@ class TestCActivity : BaseActivity() {
         val viewModel: DiceRollViewModel by viewModels()
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.uiState.collect {
+//                    // Update UI elements
+//                    Log.d("lifeCycleLog","STARTED")
+//                }
+//            }
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.uiState.collect {
                     // Update UI elements
-                    Log.d("zxcv","aa")
+                    Log.d("lifeCycleLog","CREATED")
                 }
             }
+            repeatOnLifecycle(Lifecycle.State.DESTROYED) {
+                viewModel.uiState.collect {
+                    // Update UI elements
+                    Log.d("lifeCycleLog","DESTROYED")
+                }
+            }
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.uiState.collect {
+                    // Update UI elements
+                    Log.d("lifeCycleLog","RESUMED")
+                }
+            }
+            //不能添加这个，退出的时候会报错
+//            repeatOnLifecycle(Lifecycle.State.INITIALIZED) {
+//                viewModel.uiState.collect {
+//                    // Update UI elements
+//                    Log.d("lifeCycleLog","INITIALIZED")
+//                }
+//            }
         }
         findViewById<Button>(R.id.bt_kotlin_coroutine).also {
             it.setOnClickListener {
