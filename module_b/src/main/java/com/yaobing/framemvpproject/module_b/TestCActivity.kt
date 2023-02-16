@@ -19,39 +19,54 @@ class TestCActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         val viewModel: DiceRollViewModel by viewModels()
+        Log.d("threadLog-0",this.toString())
 
         lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.uiState.collect {
-//                    // Update UI elements
-//                    Log.d("lifeCycleLog","STARTED")
-//                }
-//            }
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            Log.d("threadLog-1",this.toString())
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                Log.d("threadLog-2",this.toString())
+
                 viewModel.uiState.collect {
                     // Update UI elements
-                    Log.d("lifeCycleLog","CREATED")
+                    Log.d("threadLog-3",this.toString())
+
+                    Log.d("lifeCycleLog","STARTED")
                 }
             }
+        }
+        lifecycleScope.launchWhenCreated {
+            Log.d("threadLog-4",this.toString())
+
+            Log.d("lifeCycleLog","launch CREATED")
+        }
+        lifecycleScope.launchWhenStarted {
+            Log.d("threadLog-5",this.toString())
+
+            Log.d("lifeCycleLog","launch STARTED")
+        }
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.DESTROYED) {
                 viewModel.uiState.collect {
                     // Update UI elements
                     Log.d("lifeCycleLog","DESTROYED")
                 }
             }
+        }
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.uiState.collect {
                     // Update UI elements
                     Log.d("lifeCycleLog","RESUMED")
                 }
             }
-            //不能添加这个，退出的时候会报错
-//            repeatOnLifecycle(Lifecycle.State.INITIALIZED) {
-//                viewModel.uiState.collect {
-//                    // Update UI elements
-//                    Log.d("lifeCycleLog","INITIALIZED")
-//                }
-//            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.uiState.collect {
+                    // Update UI elements
+                    Log.d("lifeCycleLog","CREATED")
+                }
+            }
         }
         findViewById<Button>(R.id.bt_kotlin_coroutine).also {
             it.setOnClickListener {
