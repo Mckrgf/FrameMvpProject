@@ -11,6 +11,8 @@ import com.yaobing.module_apt.Router
 import com.yaobing.module_middleware.activity.BaseActivity
 import com.yaobing.framemvpproject.module_b.R
 import com.yaobing.framemvpproject.module_b.viewModel.DiceRollViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -44,7 +46,14 @@ class TestCActivity : BaseActivity() {
 
             Log.d("lifeCycleLog","launch STARTED")
         }
-        lifecycleScope.launch {
+
+        val eHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+            run {
+                Log.d("zxcv", coroutineContext.toString() + throwable.toString())
+            }
+        }
+        //可以指定调度器、异常处理、启动模式
+        lifecycleScope.launch(Dispatchers.Main + eHandler,CoroutineStart.ATOMIC) {
             repeatOnLifecycle(Lifecycle.State.DESTROYED) {
                 viewModel.uiState.collect {
                     // Update UI elements
