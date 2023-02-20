@@ -29,11 +29,11 @@ class TestCActivity : BaseActivity() {
                 viewModel.rollDice()
             }
         }
-        otherCorotineCreate(viewModel)
+        otherCoroutineCreate(viewModel)
 
     }
 
-    private fun otherCorotineCreate(viewModel: DiceRollViewModel) {
+    private fun otherCoroutineCreate(viewModel: DiceRollViewModel) {
         lifecycleScope.launch {
             Log.d("threadLog-1",this.toString())
             repeatOnLifecycle(Lifecycle.State.STARTED) {
