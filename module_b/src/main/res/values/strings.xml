@@ -1,3 +1,4 @@
 <resources>
     <string name="kotlin_demo_coroutine">kotlin协程demo</string>
+    <string name="tx_viewmodel">通过生命周期和viewmodel每次start都改变的数字</string>
 </resources>

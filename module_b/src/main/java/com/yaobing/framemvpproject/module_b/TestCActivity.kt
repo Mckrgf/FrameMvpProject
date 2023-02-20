@@ -1,21 +1,21 @@
 package com.yaobing.framemvpproject.module_b
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.yaobing.framemvpproject.module_b.viewModel.DiceRollViewModel
 import com.yaobing.module_apt.Router
 import com.yaobing.module_middleware.activity.BaseActivity
-import com.yaobing.framemvpproject.module_b.R
-import com.yaobing.framemvpproject.module_b.viewModel.DiceRollViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+@SuppressLint("SetTextI18n")
 @Router("TestCActivity")
 class TestCActivity : BaseActivity() {
     override fun initView() {
@@ -23,13 +23,25 @@ class TestCActivity : BaseActivity() {
         val viewModel: DiceRollViewModel by viewModels()
         Log.d("threadLog-0",this.toString())
 
+        val buttonCoroutine =  findViewById<Button>(R.id.bt_kotlin_coroutine)
+        buttonCoroutine.also {
+            it.setOnClickListener {
+                viewModel.rollDice()
+            }
+        }
+        otherCorotineCreate(viewModel)
+
+    }
+
+    private fun otherCorotineCreate(viewModel: DiceRollViewModel) {
         lifecycleScope.launch {
             Log.d("threadLog-1",this.toString())
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 Log.d("threadLog-2",this.toString())
-
                 viewModel.uiState.collect {
+
                     // Update UI elements
+                    findViewById<TextView>(R.id.tv_viewmodel).text = getString(R.string.tx_viewmodel) + ":" +  it.firstDieValue + "; 循环了${it.numberOfRolls}次"
                     Log.d("threadLog-3",this.toString())
 
                     Log.d("lifeCycleLog","STARTED")
@@ -37,14 +49,14 @@ class TestCActivity : BaseActivity() {
             }
         }
         lifecycleScope.launchWhenCreated {
-            Log.d("threadLog-4",this.toString())
+            Log.d("threadLog-4", this.toString())
 
-            Log.d("lifeCycleLog","launch CREATED")
+            Log.d("lifeCycleLog", "launch CREATED")
         }
         lifecycleScope.launchWhenStarted {
-            Log.d("threadLog-5",this.toString())
+            Log.d("threadLog-5", this.toString())
 
-            Log.d("lifeCycleLog","launch STARTED")
+            Log.d("lifeCycleLog", "launch STARTED")
         }
 
         val eHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -53,11 +65,11 @@ class TestCActivity : BaseActivity() {
             }
         }
         //可以指定调度器、异常处理、启动模式
-        lifecycleScope.launch(Dispatchers.Main + eHandler,CoroutineStart.ATOMIC) {
+        lifecycleScope.launch(Dispatchers.Main + eHandler, CoroutineStart.ATOMIC) {
             repeatOnLifecycle(Lifecycle.State.DESTROYED) {
                 viewModel.uiState.collect {
                     // Update UI elements
-                    Log.d("lifeCycleLog","DESTROYED")
+                    Log.d("lifeCycleLog", "DESTROYED")
                 }
             }
         }
@@ -65,7 +77,7 @@ class TestCActivity : BaseActivity() {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.uiState.collect {
                     // Update UI elements
-                    Log.d("lifeCycleLog","RESUMED")
+                    Log.d("lifeCycleLog", "RESUMED")
                 }
             }
         }
@@ -73,13 +85,8 @@ class TestCActivity : BaseActivity() {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.uiState.collect {
                     // Update UI elements
-                    Log.d("lifeCycleLog","CREATED")
+                    Log.d("lifeCycleLog", "CREATED")
                 }
-            }
-        }
-        findViewById<Button>(R.id.bt_kotlin_coroutine).also {
-            it.setOnClickListener {
-
             }
         }
     }

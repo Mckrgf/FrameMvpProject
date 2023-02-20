@@ -4,14 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".TestCActivity">
 
-    <Button
+    <TextView
+        android:background="@color/cardview_dark_background"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_introduce"
+        android:text="本页面主要技术点：kotlin、协程、viewmodel、kotlin协程、kotlin数据流"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/bt_kotlin_coroutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bt_kotlin_coroutine"
-        android:text="@string/kotlin_demo_coroutine"/>
+        android:text="玩骰子"
+        app:layout_constraintRight_toLeftOf="@id/tv_viewmodel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_introduce" />
+
+    <TextView
+
+        android:id="@+id/tv_viewmodel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tx_viewmodel"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_kotlin_coroutine"
+        app:layout_constraintTop_toBottomOf="@id/tv_introduce"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
