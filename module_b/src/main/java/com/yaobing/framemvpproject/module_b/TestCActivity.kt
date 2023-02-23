@@ -1,6 +1,7 @@
 package com.yaobing.framemvpproject.module_b
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -10,20 +11,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.yaobing.framemvpproject.module_b.viewModel.DiceRollViewModel
 import com.yaobing.module_apt.Router
+import com.yaobing.module_middleware.Utils.ToastUtil
+import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BaseActivity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 @SuppressLint("SetTextI18n")
 @Router("TestCActivity")
 class TestCActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         val viewModel: DiceRollViewModel by viewModels()
-        Log.d("threadLog-0",this.toString())
+        Log.d("threadLog-0", this.toString())
 
-        val buttonCoroutine =  findViewById<Button>(R.id.bt_kotlin_coroutine)
+        val buttonCoroutine = findViewById<Button>(R.id.bt_kotlin_coroutine)
         buttonCoroutine.also {
             it.setOnClickListener {
                 viewModel.rollDice()
@@ -31,20 +35,43 @@ class TestCActivity : BaseActivity() {
         }
         otherCoroutineCreate(viewModel)
 
+        findViewById<Button>(R.id.bt_entrust_class).setOnClickListener {
+            val b = baseImpl(this, "类委托", "b")
+            Entrust(b).printf()
+        }
+
     }
 
+    //=========================委托相关
+    interface Base {
+        fun printf() {
+        }
+    }
+
+    class baseImpl(var context: Context, var x: String, var name: String) : Base {
+        override fun printf() {
+            super.printf()
+            Log.d("zxcv", "baseImpl用$name 说了$x")
+            ToastUtil.showToast(context, "baseImpl用$name 说了$x")
+        }
+    }
+
+    class Entrust(b: Base) : Base by b
+
+    //=========================协程相关
     private fun otherCoroutineCreate(viewModel: DiceRollViewModel) {
         lifecycleScope.launch {
-            Log.d("threadLog-1",this.toString())
+            Log.d("threadLog-1", this.toString())
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.d("threadLog-2",this.toString())
+                Log.d("threadLog-2", this.toString())
                 viewModel.uiState.collect {
 
                     // Update UI elements
-                    findViewById<TextView>(R.id.tv_viewmodel).text = getString(R.string.tx_viewmodel) + ":" +  it.firstDieValue + "; 循环了${it.numberOfRolls}次"
-                    Log.d("threadLog-3",this.toString())
+                    findViewById<TextView>(R.id.tv_viewmodel).text =
+                        getString(R.string.tx_viewmodel) + ":" + it.firstDieValue + "; 循环了${it.numberOfRolls}次"
+                    Log.d("threadLog-3", this.toString())
 
-                    Log.d("lifeCycleLog","STARTED")
+                    Log.d("lifeCycleLog", "STARTED")
                 }
             }
         }
