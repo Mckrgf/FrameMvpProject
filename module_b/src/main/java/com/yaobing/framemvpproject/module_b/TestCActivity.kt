@@ -36,27 +36,28 @@ class TestCActivity : BaseActivity() {
         otherCoroutineCreate(viewModel)
 
         findViewById<Button>(R.id.bt_entrust_class).setOnClickListener {
-            val b = baseImpl(this, "类委托", "b")
-            Entrust(b).printf()
+            val entrust = Entrust(BaseImpl(TestCActivity@this,"123","委托者1号"))
+            entrust.show()
         }
 
     }
 
     //=========================委托相关
-    interface Base {
-        fun printf() {
+    //一个基础接口
+    interface BaseInterface {
+        fun show() {
         }
     }
-
-    class baseImpl(var context: Context, var x: String, var name: String) : Base {
-        override fun printf() {
-            super.printf()
-            Log.d("zxcv", "baseImpl用$name 说了$x")
-            ToastUtil.showToast(context, "baseImpl用$name 说了$x")
+    //一个基础接口的实现类，重载接口的方法，把委托类的东西用起来
+    class BaseImpl(private var context: Context,private var valueString: String,private var userString: String) : BaseInterface{
+        override fun show() {
+            super.show()
+            ToastUtil.showToast(context,"收到了$userString 委托过来的内容$valueString")
         }
     }
+    //一个委托类
+    class Entrust(b : BaseInterface) : BaseInterface by b
 
-    class Entrust(b: Base) : Base by b
 
     //=========================协程相关
     private fun otherCoroutineCreate(viewModel: DiceRollViewModel) {
