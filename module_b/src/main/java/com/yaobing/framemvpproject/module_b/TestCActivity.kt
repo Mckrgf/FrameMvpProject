@@ -39,6 +39,10 @@ class TestCActivity : BaseActivity() {
             val entrust = Entrust(BaseImpl(TestCActivity@this,"123","委托者1号"))
             entrust.show()
         }
+        findViewById<Button>(R.id.databinding).setOnClickListener {
+            IntentRouter.go(this, "DataBindingActivity")
+
+        }
 
     }
 

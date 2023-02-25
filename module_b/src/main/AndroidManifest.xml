@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".TestCActivity"></activity>
+        <activity android:name=".DataBindingActivity"></activity>
     </application>
 
 </manifest>

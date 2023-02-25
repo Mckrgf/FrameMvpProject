@@ -42,6 +42,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="databinding等"
+        android:id="@+id/databinding"
+        app:layout_constraintTop_toBottomOf="@id/tv_viewmodel"
+        app:layout_constraintStart_toEndOf="@id/bt_entrust_class"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/bt_entrust_class"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_kotlin_coroutine"

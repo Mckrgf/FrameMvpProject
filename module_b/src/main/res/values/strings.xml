@@ -1,4 +1,21 @@
 <resources>
     <string name="kotlin_demo_coroutine">kotlin协程demo</string>
     <string name="tx_viewmodel">通过生命周期和viewmodel每次start都改变的数字</string>
+    <string name="app_name">TestGitDemo</string>
+    <string name="user_list">用户列表</string>
+    <string name="user_name">用户名</string>
+    <string name="test_string">test_string</string>
+    <string name="testIdCard">测试身份证识别</string>
+    <string name="testIdCardResult">识别结果</string>
+    <string name="testGet">测试get</string>
+    <string name="testPost">测试post</string>
+    <string name="trans_text">请输入要翻译的文本</string>
+    <string name="task">任务列表</string>
+    <string name="githubUsername">请输入github用户名</string>
+    <string name="searchRepo">查所有</string>
+    <string name="searchPage">查分页</string>
+    <string name="repo_chosen">被选中的库</string>
+    <string name="add_issue">提交issue</string>
+    <string name="issue_des">issue描述</string>
+    <string name="des">本页面主要技术 \ndatabinding的初步使用（配合普通bean类）\ndatabinding配合observablebean类 \n约束布局的使用 \nviewModel的初步使用  \nviewmodel+livedata配合databinding</string>
 </resources>

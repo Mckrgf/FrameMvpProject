@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableMap" />
+
+        <variable
+            name="observableMap"
+            type="ObservableMap&lt;String, Object>" />
+
+        <variable
+            name="User"
+            type="com.god.yb.testgitdemo.item.User" />
+
+        <variable
+            name="observableUser"
+            type="com.god.yb.testgitdemo.item.ObservableUser" />
+
+        <variable
+            name="myViewModel"
+            type="com.yaobing.framemvpproject.module_b.viewModel.MyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/des"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_456"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="bt_calculate_4,bt_calculate_5,bt_calculate_6" />
+
+        <LinearLayout
+            android:id="@+id/ll_databinding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_des">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text='普通bean类' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{User.name}' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{User.age}' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{String.valueOf(User.sex)}' />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_databinding_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_databinding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text='ObservableBean' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{observableUser.name}' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{String.valueOf(observableUser.age)}' />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{String.valueOf(observableUser.sex)}' />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_calculate_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_databinding_a" />
+
+        <Button
+            android:id="@+id/bt_calculate_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            app:layout_constraintStart_toEndOf="@+id/bt_calculate_1"
+            app:layout_constraintTop_toBottomOf="@+id/ll_databinding_a" />
+
+        <Button
+            android:id="@+id/bt_calculate_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cdcd"
+            app:layout_constraintStart_toEndOf="@+id/bt_calculate_2"
+            app:layout_constraintTop_toBottomOf="@+id/ll_databinding_a" />
+
+        <Button
+            android:id="@+id/bt_calculate_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_calculate_1" />
+
+        <Button
+            android:id="@+id/bt_calculate_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            app:layout_constraintStart_toEndOf="@+id/bt_calculate_4"
+            app:layout_constraintTop_toBottomOf="@+id/bt_calculate_2" />
+
+        <Button
+            android:id="@+id/bt_calculate_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            app:layout_constraintStart_toEndOf="@+id/bt_calculate_5"
+            app:layout_constraintTop_toBottomOf="@+id/bt_calculate_3" />
+
+        <TextView
+            android:id="@+id/tv_show_group"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="《==约束布局展示.点击可分组显隐"
+            app:layout_constraintBottom_toBottomOf="@+id/divider_a"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/bt_calculate_3"
+            app:layout_constraintTop_toBottomOf="@+id/ll_databinding" />
+
+        <View
+            android:id="@+id/divider_a"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toBottomOf="@id/bt_calculate_4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
