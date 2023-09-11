@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -61,7 +61,7 @@ dependencies {
 
     //快捷列表adapter
 //    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    api 'com.blankj:utilcode:1.25.9'
+    api 'com.blankj:utilcodex:1.31.1'
     implementation project(':module_common_view')
 
 //    implementation project(path: ':module_base:module_apt')
