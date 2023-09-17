@@ -27,11 +27,11 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
             //为了测试动态代理方便，先注释掉
             presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
 
-            val testRouterA = TestRouter()
-            val obj = AAA()
-            testRouterA.register(obj)
-            val a = testRouterA.create(TestAPI:: class.java)
-            a.testFun("AAA")
+//            val testRouterA = TestRouter()
+//            val obj = AAA()
+//            testRouterA.register(obj)
+//            val a = testRouterA.create(TestAPI:: class.java)
+//            a.testFun("AAA")
 
 
         }

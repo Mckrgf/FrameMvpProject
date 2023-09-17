@@ -75,4 +75,23 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
 
+
+
+    api("androidx.paging:paging-runtime:$paging_version")
+
+    // alternatively - without Android dependencies for tests
+//    testImplementation("androidx.paging:paging-common:$paging_version")
+
+    // optional - RxJava2 support
+    api("androidx.paging:paging-rxjava2:$paging_version")
+
+    // optional - RxJava3 support
+    api("androidx.paging:paging-rxjava3:$paging_version")
+
+    // optional - Guava ListenableFuture support
+//    api("androidx.paging:paging-guava:$paging_version")
+
+    // optional - Jetpack Compose integration
+//    api("androidx.paging:paging-compose:1.0.0-alpha18")
+
 }
