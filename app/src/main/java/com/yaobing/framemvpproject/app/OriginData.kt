@@ -7,9 +7,9 @@ import android.util.Log
  * @date   : 2020/10/30 15:50
  * @desc   :
  */
-open class AAA : TestAPI {
+open class OriginData : TestAPI {
     override fun testFun(name: String?) {
-        Log.d("zxcv","dfdfAAa")
+        Log.d("zxcv",name.toString())
     }
 
 

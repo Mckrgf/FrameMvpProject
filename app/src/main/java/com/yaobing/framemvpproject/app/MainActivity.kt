@@ -3,12 +3,13 @@ package com.yaobing.framemvpproject.app
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import com.blankj.utilcode.util.LogUtils
 import com.yaobing.framemvpproject.app.controller.TestController
 import com.yaobing.framemvpproject.contract.GithubRepoContract
 import com.yaobing.module_apt.Controller
 import com.yaobing.module_apt.Presenter
 import com.yaobing.module_apt.Router
-import com.yaobing.module_middleware.TestRouter
+import com.yaobing.module_middleware.ProxyHandler
 import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BaseControllerActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,17 +28,18 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
             //为了测试动态代理方便，先注释掉
 //            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
 
-            val testRouterA = TestRouter()
-            val obj = AAA()
-            testRouterA.register(obj)
-            val a = testRouterA.create(TestAPI:: class.java)
-            a.testFun("AAA")
+            val mProxyHandler = ProxyHandler()
+            mProxyHandler.register(OriginData())
+            Log.d("zxcv","0调用create方法获取实例")
+            val a = mProxyHandler.create(TestAPI:: class.java)
+            Log.d("zxcv","3获取到实例的代理类Proxy了，准备调用实例的方法")
+            a.testFun("原始功能")
 
 
         }
         bt_over_module.setOnClickListener {
 
-            val testRouterB = TestRouter()
+            val testRouterB = ProxyHandler()
             val obj1 = BBB()
             testRouterB.register(obj1)
             val b = testRouterB.create(TestAPI:: class.java)
@@ -53,9 +55,9 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
     }
 
     fun proxyTest() {
-        val demo = AAA() // 创建要被代理的实例
+        val demo = OriginData() // 创建要被代理的实例
         val proxy = Proxy.newProxyInstance( // 获取实例的代理对象
-            AAA::class.java.classLoader, // 获取实例的classloader
+            OriginData::class.java.classLoader, // 获取实例的classloader
             arrayOf(TestAPI::class.java), // 实例接口
             object : InvocationHandler {
                 override fun invoke(proxy: Any, method: Method, args: Array<out Any>): Any {
