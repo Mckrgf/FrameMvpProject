@@ -25,9 +25,12 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bt_all.setOnClickListener {
-            //为了测试动态代理方便，先注释掉
-//            presenterRouter.create(GithubRepoAPI:: class.java).getAllRepoByName("MCKRGF")
+            //实战
+            val proxy = presenterRouter.create(GithubRepoAPI:: class.java)
+            proxy.getAllRepoByName("MCKRGF")
 
+
+            //实现方式
             val mProxyHandler = ProxyHandler()
             mProxyHandler.register(OriginData())
             Log.d("zxcv","0调用create方法获取实例")
