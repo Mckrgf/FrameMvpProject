@@ -58,7 +58,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
     }
 
     fun proxyTest() {
-        val demo = OriginData() // 创建要被代理的实例
+        val demo =  OriginData() // 创建要被代理的实例
         val proxy = Proxy.newProxyInstance( // 获取实例的代理对象
             OriginData::class.java.classLoader, // 获取实例的classloader
             arrayOf(TestAPI::class.java), // 实例接口
