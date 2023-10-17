@@ -35,7 +35,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class BaseActivity extends AppCompatActivity implements IData {
-
+    public static int NO_VIEW = -1;
     private BaseApp app;
     public Uri uriForFile;
     public String path;
@@ -48,8 +48,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IData {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        rootView = LayoutInflater.from(this).inflate(getLayoutID(), null);
-        setContentView(rootView);
+        if (NO_VIEW != getLayoutID()) {
+            rootView = LayoutInflater.from(this).inflate(getLayoutID(), null);
+            setContentView(rootView);
+        }
         onInit();
         initView();
         initListener();
