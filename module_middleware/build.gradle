@@ -93,5 +93,5 @@ dependencies {
 
     // optional - Jetpack Compose integration
 //    api("androidx.paging:paging-compose:1.0.0-alpha18")
-
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 }
