@@ -8,6 +8,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        flavorDimensions "channel"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -19,9 +20,10 @@ android {
     }
 
     android.applicationVariants.all { variant ->
+        println("variant的内容" + variant)
         variant.outputs.all {
             def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
-            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
+            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name  + "-" + variant.productFlavors[0].name+".apk"
         }
     }
 
@@ -49,6 +51,33 @@ android {
         }
     }
 
+
+
+    // 配置不同渠道参数
+    productFlavors {
+        huawei {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "huawei_app",
+                    "channel":"huawei"
+            ]
+        }
+        vivo {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "vivo_app",
+                    "channel": "vivo"
+            ]
+        }
+    }
+
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -64,7 +93,6 @@ android {
         enabled = true
     }
 }
-
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
