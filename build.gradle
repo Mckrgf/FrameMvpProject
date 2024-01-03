@@ -37,12 +37,12 @@ allprojects {
 }
 
 ext{
-    compileSdkVersion = 31
+    compileSdkVersion = 32
     buildToolsVersion = "28.0.3"
     applicationId = "com.yaobing.framemvpproject"
 
-    minSdkVersion = 26
-    targetSdkVersion = 31
+    minSdkVersion = 28
+    targetSdkVersion = 32
     versionCode = 1 //2019/11/12 2020/04/22 2020/06/10
     versionName = "1.1.1"
     appcompatVersion = "1.2.0"
