@@ -2,8 +2,15 @@
 buildscript {
     ext.kotlin_version = "1.3.72"
     repositories {
-        google()
+
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/' }
         jcenter()
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" } //阿里云播放器和上传sdk
+        maven { url 'https://repo1.maven.org/maven2' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
@@ -17,12 +24,19 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/' }
         jcenter()
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" } //阿里云播放器和上传sdk
+        maven { url 'https://repo1.maven.org/maven2' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 
-ext{
+ext {
     compileSdkVersion = 29
     buildToolsVersion = "28.0.3"
     applicationId = "com.yaobing.framemvpproject"
