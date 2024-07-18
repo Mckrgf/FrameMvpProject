@@ -55,6 +55,16 @@ android {
 
     // 配置不同渠道参数
     productFlavors {
+        common {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "阿阿",
+                    "channel":"aaaa"
+            ]
+        }
         huawei {
             //渠道参数
             buildConfigField "String", "token", "\"XXXX\""
