@@ -94,4 +94,10 @@ dependencies {
     // optional - Jetpack Compose integration
 //    api("androidx.paging:paging-compose:1.0.0-alpha18")
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
+    //下拉刷新
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'
+
 }
