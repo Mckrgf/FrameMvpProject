@@ -11,6 +11,10 @@ buildscript {
         maven { url 'https://developer.huawei.com/repo/'}
         maven { url "https://jitpack.io" }
         jcenter()
+        // 私有仓库地址
+        maven {
+            allowInsecureProtocol = true
+            url "http://lib.gcssloop.com:8081/repository/gcssloop-central/" }
         mavenLocal()
         mavenCentral()
         maven { url 'https://repo1.maven.org/maven2' }
@@ -33,6 +37,10 @@ allprojects {
         maven { url "https://jitpack.io" }
         jcenter()
         mavenLocal()
+        // 私有仓库地址
+        maven {
+            allowInsecureProtocol = true
+            url "http://lib.gcssloop.com:8081/repository/gcssloop-central/" }
         mavenCentral()
         maven { url 'https://repo1.maven.org/maven2' }
     }
