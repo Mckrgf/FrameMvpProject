@@ -310,7 +310,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 //        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 
         WebSettings settings = webView.getSettings();
-        settings.setAppCacheEnabled(true);
+//        settings.setAppCacheEnabled(true);
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setDatabaseEnabled(true);

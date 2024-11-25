@@ -1,11 +1,18 @@
 package com.yaobing.module_middleware.Utils;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio;
 import android.provider.MediaStore.Video;
@@ -28,6 +35,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FileUtils {
     /**
@@ -1114,6 +1122,169 @@ public class FileUtils {
             filePath = cursor.getString(columnIndex);
         }
         return filePath;
+    }
+    @SuppressLint({"NewApi"})
+    public static String getPathFromUri(Context context, Uri uri) {
+        boolean isKitKat = Build.VERSION.SDK_INT >= 19;
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            String id;
+            String[] split;
+            String type;
+            if (isExternalStorageDocument(uri)) {
+                id = DocumentsContract.getDocumentId(uri);
+                split = id.split(":");
+                type = split[0];
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            } else if (isDownloadsDocument(uri)) {
+                id = DocumentsContract.getDocumentId(uri);
+                if (!TextUtils.isEmpty(id)) {
+                    try {
+                        Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                        return getDataColumn(context, contentUri, (String)null, (String[])null);
+                    } catch (NumberFormatException var9) {
+                        Log.i("FileUtils", var9.getMessage());
+                        return null;
+                    }
+                }
+            } else if (isMediaDocument(uri)) {
+                id = DocumentsContract.getDocumentId(uri);
+                split = id.split(":");
+                type = split[0];
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                String selection = "_id=?";
+                String[] selectionArgs = new String[]{split[1]};
+                return getDataColumn(context, contentUri, "_id=?", selectionArgs);
+            }
+        } else {
+            if ("content".equalsIgnoreCase(uri.getScheme())) {
+                if (isGooglePhotosUri(uri)) {
+                    return uri.getLastPathSegment();
+                }
+
+                return getDataColumn(context, uri, (String)null, (String[])null);
+            }
+
+            if ("file".equalsIgnoreCase(uri.getScheme())) {
+                return uri.getPath();
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        String column = "_data";
+        String[] projection = new String[]{"_data"};
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, (String)null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow("_data");
+                String var8 = cursor.getString(column_index);
+                return var8;
+            }
+        } catch (IllegalArgumentException var12) {
+            Log.i("FileUtils", String.format(Locale.getDefault(), "getDataColumn: _data - [%s]", var12.getMessage()));
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+
+        }
+
+        return null;
+    }
+
+
+    //路径文件转成URI
+    public static Uri getImageContentUri(Context context, java.io.File imageFile) {
+
+        String filePath = imageFile.getAbsolutePath();
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+
+                new String[]{MediaStore.Images.Media._ID}, MediaStore.Images.Media.DATA + "=? ",
+
+                new String[]{filePath}, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            @SuppressLint("Range")
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+
+            return Uri.withAppendedPath(baseUri, "" + id);
+
+        } else {
+
+            if (imageFile.exists()) {
+
+                ContentValues values = new ContentValues();
+
+                values.put(MediaStore.Images.Media.DATA, filePath);
+
+                return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+            } else {
+
+                return null;
+
+            }
+        }
+    }
+
+
+    //Uri转绝对路径
+    public static String getFilePathFromContentUri(Uri selectedVideoUri, ContentResolver contentResolver) {
+
+        String filePath;
+
+        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
+
+        Cursor cursor = contentResolver.query(selectedVideoUri, filePathColumn, null, null, null);
+
+        // 也可用下面的方法拿到cursor
+
+        // Cursor cursor = this.context.managedQuery(selectedVideoUri, filePathColumn, null, null, null);
+
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
+        filePath = cursor.getString(columnIndex);
+
+        cursor.close();
+
+        return filePath;
+
     }
 
 }
