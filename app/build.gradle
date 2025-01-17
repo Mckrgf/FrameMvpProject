@@ -12,6 +12,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        buildConfigField "String", "IS_DEV", '\"true\"'
+        buildConfigField "String", "IS_OFFICE", "\"false\""
+        buildConfigField "Boolean", "IS_DEV_BOOLEAN", "false"
+        buildConfigField "Boolean", "IS_OFFICE_BOOLEAN", "false"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
