@@ -36,6 +36,9 @@ android {
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
     }
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
