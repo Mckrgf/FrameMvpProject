@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import com.blankj.utilcode.util.LogUtils
 import com.yaobing.framemvpproject.app.controller.TestController
+import com.yaobing.framemvpproject.app.databinding.ActivityMainBinding
 import com.yaobing.framemvpproject.contract.GithubRepoContract
 import com.yaobing.module_apt.Controller
 import com.yaobing.module_apt.Presenter
@@ -12,19 +13,22 @@ import com.yaobing.module_apt.Router
 import com.yaobing.module_middleware.ProxyHandler
 import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BaseControllerActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.*
 
+
 @Router("MainActivity")
 @Presenter(value = [GithubRepoPresenter::class])
 @Controller(TestController::class)
 class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
+    lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bt_all.setOnClickListener {
+        binding = ActivityMainBinding.bind(findViewById(android.R.id.content))
+
+        binding.btAll.setOnClickListener {
             //实战
             val proxy = presenterRouter.create(GithubRepoAPI:: class.java)
             proxy.getAllRepoByName("MCKRGF")
@@ -40,7 +44,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
 
 
         }
-        bt_over_module.setOnClickListener {
+        binding.btOverModule.setOnClickListener {
 
             val testRouterB = ProxyHandler()
             val obj1 = BBB()
@@ -81,7 +85,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
 
 
     private fun initWebView() {
-        webview.loadUrl("http://www.baidu.com")
+        binding.webview.loadUrl("http://www.baidu.com")
     }
 
     override fun getAllRepoByNameFailed(errorMsg: String?) {

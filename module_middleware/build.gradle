@@ -2,10 +2,12 @@ apply plugin: 'com.android.library'
 //apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 group='com.github.MCKRGF'
 android {
+    namespace 'com.yaobing.module_middleware'  // Add this line matching your applicationId
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -27,8 +29,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     lintOptions {
         abortOnError false
@@ -38,6 +40,9 @@ android {
     }
     kapt {
         correctErrorTypes true
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

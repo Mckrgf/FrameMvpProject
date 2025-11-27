@@ -4,6 +4,8 @@ plugins {
 }
 group='com.github.MCKRGF'
 android {
+    namespace 'com.yaobing.framemvpproject.shell'  // Add this line matching your applicationId
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -51,7 +53,9 @@ android {
         }
     }
 
-
+    buildFeatures {
+        buildConfig true
+    }
 
     // 配置不同渠道参数
     productFlavors {
@@ -93,8 +97,8 @@ android {
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     dataBinding{
         enabled true
