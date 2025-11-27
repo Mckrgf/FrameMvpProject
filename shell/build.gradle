@@ -106,6 +106,10 @@ android {
     viewBinding {
         enabled = true
     }
+    // 添加以下配置排除重复的 LICENSE.txt 文件
+    packagingOptions {
+        exclude 'META-INF/androidx/annotation/annotation/LICENSE.txt'
+    }
 }
 dependencies {
 
