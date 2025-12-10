@@ -4,7 +4,7 @@ tasks.withType(JavaCompile) {
 }
 buildscript {
     ext.kotlin_version = "2.2.0"
-    ext.paging_version = "3.1.1"
+    ext.paging_version = "3.3.6"
     repositories {
         mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/google/' }
@@ -28,7 +28,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.13.1'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
 
         // NOTE: Do not place your application dependencies here; they belong
