@@ -26,7 +26,8 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.bind(findViewById(android.R.id.content))
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.btAll.setOnClickListener {
             //实战
@@ -58,7 +59,7 @@ class MainActivity : BaseControllerActivity() , GithubRepoContract.View{
         initWebView()
     }
     override fun getLayoutID(): Int {
-        return R.layout.activity_main
+        return -1
     }
 
     fun proxyTest() {
