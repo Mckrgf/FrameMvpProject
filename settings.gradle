@@ -1,5 +1,10 @@
+pluginManagement {
+    plugins {
+        id 'org.jetbrains.kotlin.jvm' version '$kotlin_version'
+    }
+}
 rootProject.name = "FrameMvpProject"
-
+testFuncA()
 include ':app'
 
 include ':module_A:mylibrary2'
@@ -15,8 +20,65 @@ include ':module_common_view'
 include ':module_middleware'
 
 include ':shell'
+testFuncB()
+
+def testFuncA() {
+    println("我是setting.gradle里的方法A，我被执行了")
+}
+def testFuncB() {
+    println("我是setting.gradle里的方法B，我被执行了")
+}
+//======================从下面开始是动态加载业务模块的功能代码
+//includeModules()
+def includeModules() {
+    String[] folders = ["isupplant-shell", "isupplant-wts", "isupplant-yh", "isupplant-ses", "isupplant-eam", "isupplant-ems",
+                        "isupplant-patrol", "isupplant-wms", "isupplant-wom", "isupplant-lims", "isupplant-psc" , "isupplant-paper", "suplink","isupplant-chemfibersuite"]
+
+    Set<String> ignoreFolders = new HashSet<>()
+    ignoreFolders.add(".git")
+    ignoreFolders.add("libs")
+    ignoreFolders.add("build")
+    ignoreFolders.add("module_ble")
+    ignoreFolders.add("module_wom_ble")
+    ignoreFolders.add("eam-plugin")
+    ignoreFolders.add("patrol-plugin")
+    if(BUILD_FLAVOR != "RELEASE_SUPLINK"){
+        ignoreFolders.add("suplink")
+    }
+    //在这里添加要过滤的文件夹
+
+    List<String> modules = new ArrayList<>()
+    for(String folder:folders){
+        modules.addAll(getIncludeFiles(folder, ignoreFolders))
+    }
+    for(String module:modules){
+        println(module)
+        include module
+    }
+}
 
 
+def checkModule(moduleName) {
+    File file = new File(moduleName)
+    return file.exists()
+}
+
+def getIncludeFiles(gitFilePath, ignoreFolders) {
+    File folder = new File(gitFilePath)
+    List<String> modules = new ArrayList<>()
+    if (folder.exists()) {
+        File[] fileList = folder.listFiles()
+        if (fileList != null && fileList.size() > 0) {
+            for (File file:fileList) {
+                if (file.isDirectory() && !(ignoreFolders.contains(file.name) || file.name.contains("plugin"))){
+                    modules.add(':'+gitFilePath+':' + file.name)
+                }
+            }
+
+        }
+    }
+    return modules;
+}
 
 //include ':module_view:moduel_myview'//test测试家里pc的用户名
 //include ':module_test:module_test_003'

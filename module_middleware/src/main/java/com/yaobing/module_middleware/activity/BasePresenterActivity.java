@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BasePresenterActivity extends BaseActivity {
+import io.reactivex.disposables.CompositeDisposable;
 
+public abstract class BasePresenterActivity extends BaseActivity {
+    protected CompositeDisposable mCompositeSubscription = new CompositeDisposable();
 //    @Override
 //    protected int getLayoutID() {
 //        return 0;
@@ -71,7 +73,7 @@ public abstract class BasePresenterActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        mCompositeSubscription.dispose();
         for(BasePresenter presenter: mPresenters){
 
             if(presenter!=null){

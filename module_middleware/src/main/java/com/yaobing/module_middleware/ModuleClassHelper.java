@@ -1,6 +1,8 @@
 package com.yaobing.module_middleware;
 
 
+import android.util.Log;
+
 import com.yaobing.module_middleware.Utils.LogUtil;
 
 import java.lang.reflect.Method;
@@ -53,6 +55,7 @@ public class ModuleClassHelper {
 
             try {
                 Class clazz = Class.forName(module);
+                Log.d("ModuleClassHelperzxcv","setup:" + module);
 
                 Method method = clazz.getMethod("setup", new Class[]{});
                 method.invoke(null);

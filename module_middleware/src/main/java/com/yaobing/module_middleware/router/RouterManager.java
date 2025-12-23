@@ -1,6 +1,8 @@
 package com.yaobing.module_middleware.router;
 
 
+import android.util.Log;
+
 import com.yaobing.module_middleware.interfaces.IRouterManager;
 
 import java.util.HashMap;
@@ -15,11 +17,13 @@ public class RouterManager implements IRouterManager {
 
 
     public static RouterManager getInstance() {
-
+        Log.d("RouterManagerzxcv","getInstance");
         return RouterManagerHolder.instance;
     }
 
     private RouterManager() {
+        Log.d("RouterManagerzxcv","无参构造函数");
+
     }
 
 
@@ -27,6 +31,8 @@ public class RouterManager implements IRouterManager {
 
     @Override
     public void register(String name, Class<?> clazz) {
+        Log.d("RouterManagerzxcv","register:" + clazz.getName());
+
         if(!mRouterMap.containsKey(name))
             mRouterMap.put(name, clazz);
     }

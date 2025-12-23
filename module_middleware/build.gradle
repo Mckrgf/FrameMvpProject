@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 group='com.github.MCKRGF'
 android {
+    namespace 'com.yaobing.module_middleware'  // Add this line matching your applicationId
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -27,8 +29,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     lintOptions {
         abortOnError false
@@ -36,12 +38,18 @@ android {
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
     }
+    kapt {
+        correctErrorTypes true
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation "androidx.core:core-ktx:$rootProject.ext.ktxCoreVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayoutVersion"
     testImplementation 'junit:junit:4.12'
@@ -54,14 +62,14 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.1.16'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
     api 'com.google.code.gson:gson:2.8.5'
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     //快捷列表adapter
 //    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    api 'com.blankj:utilcode:1.25.9'
+    api 'com.blankj:utilcodex:1.31.1'
     implementation project(':module_common_view')
 
 //    implementation project(path: ':module_base:module_apt')
@@ -74,5 +82,30 @@ dependencies {
     // Java8 support for Lifecycles
     api 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
+
+
+
+    api("androidx.paging:paging-runtime:$paging_version")
+
+    // alternatively - without Android dependencies for tests
+//    testImplementation("androidx.paging:paging-common:$paging_version")
+
+    // optional - RxJava2 support
+    api("androidx.paging:paging-rxjava2:$paging_version")
+
+    // optional - RxJava3 support
+    api("androidx.paging:paging-rxjava3:$paging_version")
+
+    // optional - Guava ListenableFuture support
+//    api("androidx.paging:paging-guava:$paging_version")
+
+    // optional - Jetpack Compose integration
+//    api("androidx.paging:paging-compose:1.0.0-alpha18")
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
+    //下拉刷新
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'
 
 }

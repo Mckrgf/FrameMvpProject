@@ -1,13 +1,16 @@
 plugins {
     id 'com.android.application'
-    id 'com.github.dcendents.android-maven'
+    id 'maven-publish'
 }
 group='com.github.MCKRGF'
 android {
+    namespace 'com.yaobing.framemvpproject.shell'  // Add this line matching your applicationId
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        flavorDimensions "channel"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -19,9 +22,10 @@ android {
     }
 
     android.applicationVariants.all { variant ->
+        println("variant的内容" + variant)
         variant.outputs.all {
             def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
-            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name + ".apk"
+            outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name  + "-" + variant.productFlavors[0].name+".apk"
         }
     }
 
@@ -49,13 +53,52 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig true
+    }
+
+    // 配置不同渠道参数
+    productFlavors {
+        common {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "阿阿",
+                    "channel":"aaaa"
+            ]
+        }
+        huawei {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "huawei_app",
+                    "channel":"huawei"
+            ]
+        }
+        vivo {
+            //渠道参数
+            buildConfigField "String", "token", "\"XXXX\""
+
+            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            manifestPlaceholders = [
+                    "app_name": "vivo_app",
+                    "channel": "vivo"
+            ]
+        }
+    }
+
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     dataBinding{
         enabled true
@@ -63,11 +106,14 @@ android {
     viewBinding {
         enabled = true
     }
+    // 添加以下配置排除重复的 LICENSE.txt 文件
+    packagingOptions {
+        exclude 'META-INF/androidx/annotation/annotation/LICENSE.txt'
+    }
 }
-
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompatVersion"
     implementation 'com.google.android.material:material:1.3.0'
     testImplementation 'junit:junit:'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.1'

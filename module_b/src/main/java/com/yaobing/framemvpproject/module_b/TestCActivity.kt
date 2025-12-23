@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.yaobing.framemvpproject.module_b.viewModel.DiceRollViewModel
 import com.yaobing.module_apt.Router
 import com.yaobing.module_middleware.Utils.ToastUtil
-import com.yaobing.module_middleware.Utils.ToastUtils
 import com.yaobing.module_middleware.activity.BaseActivity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineStart
@@ -41,9 +40,11 @@ class TestCActivity : BaseActivity() {
         }
         findViewById<Button>(R.id.databinding).setOnClickListener {
             IntentRouter.go(this, "DataBindingActivity")
-
         }
-
+        val impl = ActionImpl()
+        val delegate = DelegateActionImpl(impl)
+        delegate.attack()
+        delegate.defense()
     }
 
     //=========================委托相关
@@ -132,5 +133,30 @@ class TestCActivity : BaseActivity() {
 
     override fun getLayoutID(): Int {
         return R.layout.activity_test_c
+    }
+}
+
+//委托相关,先有一个接口
+interface ActionInterface {
+    fun attack()
+    fun defense()
+}
+
+//再有一个实现类（被委托类）
+class ActionImpl : ActionInterface {
+    override fun attack() {
+        Log.d("zxcv","delegates： impl attack")
+    }
+
+    override fun defense() {
+        Log.d("zxcv","delegates： impl defense")
+    }
+
+}
+
+//委托类
+class DelegateActionImpl(actionInterface: ActionInterface) : ActionInterface by actionInterface {
+    override fun attack() {
+        Log.d("zxcv","delegates： delegate attack")
     }
 }

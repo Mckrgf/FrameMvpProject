@@ -1,5 +1,7 @@
 package com.yaobing.module_middleware;
 
+import android.util.Log;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -11,7 +13,8 @@ import java.util.Map;
  * @date : 2020/10/27 17:02
  * @desc :
  */
-public class TestRouter implements InvocationHandler {
+public class ProxyHandler implements InvocationHandler {
+    //负责存储代理类的接口interface
     private Map<String, Object> mPresenterMap = new HashMap<>();
 
 //    private static class PresenterRouterHolder{
@@ -66,12 +69,13 @@ public class TestRouter implements InvocationHandler {
 
     @Override
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
-
+        Log.d("zxcv","4调用invoke方法");
         String presenterName = o.getClass().getInterfaces()[0].getName();
         Object presenter = mPresenterMap.get(presenterName);
 
         if(presenter!=null){
-            return method.invoke(presenter, objects);
+            Log.d("zxcv","5获取到接口，然后调用实例中的接口方法");
+            return method.invoke(presenter, objects[0] + "（已经被代理类增强了功能！）");
         }
 
 
@@ -79,8 +83,9 @@ public class TestRouter implements InvocationHandler {
     }
 
     public <T> T create(final Class<T> presenter) {
-        T a = (T) Proxy.newProxyInstance(presenter.getClassLoader(), new Class<?>[] { presenter },
-                this);
+        Log.d("zxcv","1调用了create");
+        T a = (T) Proxy.newProxyInstance(presenter.getClassLoader(), new Class<?>[] { presenter },this);
+        Log.d("zxcv","2根据类加载器+接口+handler获取到实例的代理类" + a.getClass().getName());
         return a;
     }
 
