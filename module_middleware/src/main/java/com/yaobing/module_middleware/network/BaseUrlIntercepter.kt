@@ -5,6 +5,7 @@ import okhttp3.Response
 
 class BaseUrlIntercepter : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val a = chain.request().header()
+//        val a = chain.request().header()
+       return chain.proceed(chain.request())
     }
 }
