@@ -40,7 +40,7 @@ public class BaseApp extends Application {
         super.onCreate();
         app = this;
         Utils.init(this);
-        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init(this);
         Log.i(TAG, "当前的进程名字是：" + AppUtils.getCurProcessName(this));
 
         initRouter();
