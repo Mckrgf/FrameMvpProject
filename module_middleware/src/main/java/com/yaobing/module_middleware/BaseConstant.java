@@ -11,4 +11,6 @@ public class BaseConstant {
     public static final String WEB_AUTHORIZATION = "WEB_AUTHORIZATION";
     public static final String WEB_HAS_REFRESH = "WEB_HAS_REFRESH";
     public static final String WEB_IS_LIST = "WEB_IS_LIST";
+
+    public static final String ComposeDemoActivity = "ComposeDemoActivity";
 }
