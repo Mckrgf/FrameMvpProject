@@ -7,17 +7,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.yaobing.module_middleware.compose.theme.GreetingCardTheme
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun CustomText(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = name,
         modifier = modifier
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun CustomTextPreview() {
     GreetingCardTheme {
-        Greeting("Meghan")
+        CustomText("Meghan")
     }
 }
