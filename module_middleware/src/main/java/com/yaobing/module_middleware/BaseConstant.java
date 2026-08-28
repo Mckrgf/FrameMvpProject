@@ -13,4 +13,5 @@ public class BaseConstant {
     public static final String WEB_IS_LIST = "WEB_IS_LIST";
 
     public static final String ComposeDemoActivity = "ComposeDemoActivity";
+    public static final String TabViewPagerActivity = "TabViewPagerActivity";
 }
