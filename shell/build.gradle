@@ -1,10 +1,13 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
+
 group='com.github.MCKRGF'
+
 android {
-    namespace 'com.yaobing.framemvpproject.shell'  // Add this line matching your applicationId
+    namespace 'com.yaobing.framemvpproject.shell'
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -22,7 +25,7 @@ android {
     }
 
     android.applicationVariants.all { variant ->
-        println("variant的内容" + variant)
+        println("variant 的内容" + variant)
         variant.outputs.all {
             def createTime = new Date().format("YYMMdd-HH-mm", TimeZone.getTimeZone("GMT+08:00"))
             outputFileName = "FrameMvpProject-master" + "-${createTime}"+"-" + variant.buildType.name  + "-" + variant.productFlavors[0].name+".apk"
@@ -55,6 +58,8 @@ android {
 
     buildFeatures {
         buildConfig true
+        dataBinding true
+        viewBinding true
     }
 
     // 配置不同渠道参数
@@ -63,7 +68,7 @@ android {
             //渠道参数
             buildConfigField "String", "token", "\"XXXX\""
 
-            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            // manifest 读取的参数，在 manifest 里如何使用，见后文
             manifestPlaceholders = [
                     "app_name": "阿阿",
                     "channel":"aaaa"
@@ -73,7 +78,7 @@ android {
             //渠道参数
             buildConfigField "String", "token", "\"XXXX\""
 
-            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            // manifest 读取的参数，在 manifest 里如何使用，见后文
             manifestPlaceholders = [
                     "app_name": "huawei_app",
                     "channel":"huawei"
@@ -83,7 +88,7 @@ android {
             //渠道参数
             buildConfigField "String", "token", "\"XXXX\""
 
-            // manifest 读取的参数,在 manifest 里如何使用，见后文
+            // manifest 读取的参数，在 manifest 里如何使用，见后文
             manifestPlaceholders = [
                     "app_name": "vivo_app",
                     "channel": "vivo"
@@ -100,26 +105,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    dataBinding{
-        enabled true
-    }
-    viewBinding {
-        enabled = true
-    }
     // 添加以下配置排除重复的 LICENSE.txt 文件
     packagingOptions {
-// 统一使用相同语法（旧版本用 exclude，新版本推荐 pickFirst 或 excludes +=）
-        // 建议加上开头的斜杠 '/'，确保路径匹配更精准
-
         // 1. 排除 LICENSE 文件
         exclude '/META-INF/androidx/annotation/annotation/LICENSE.txt'
 
         // 2. 排除引起冲突的 json 文件
         exclude '/META-INF/kotlin-project-structure-metadata.json'
-
-        // 备用：如果未来还有其他类似 LICENSE/NOTICE 冲突，可以用 pickFirst（报错时再取消注释）
-        // pickFirst '/META-INF/LICENSE*'
-        // pickFirst '/META-INF/NOTICE*'
     }
 }
 
@@ -134,65 +126,14 @@ configurations.all {
         }
     }
 }
+
 dependencies {
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompatVersion"
     implementation 'com.google.android.material:material:1.3.0'
     testImplementation 'junit:junit:'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    List<String> modules = new ArrayList<>()
-
-    //可能module如果直接暴露在根目录下（如app），则用代码的方式来动态依赖是无效的？IntentRouter跳转的时候找不到。准备直接依赖试试
     implementation project(path: ':app')
     implementation project(path: ':module_b')
     println("我要动态依赖了： ")
     String[] folders = ["module_A"]
-    modules.addAll(includeModules(folders))
-    println("我要动态依赖了： 获取到的modules:" + modules.size())
-    for(String module:modules){
-        println("动态依赖了： "+module)
-        implementation findProject(module)
-    }
-    // 明确指定二级目录下的模块路径
-    implementation project(':module_A:mylibrary')
-    implementation project(':module_A:mylibrary2')
-}
-
-def includeModules(folders) {
-    Set<String> ignoreFolders = new HashSet<>()
-    ignoreFolders.add(".git")
-    ignoreFolders.add("libs")
-    ignoreFolders.add("build")
-    ignoreFolders.add("module_ble")
-    ignoreFolders.add("module_wom_ble")
-    //在这里添加要过滤的文件夹
-
-    List<String> modules = new ArrayList<>()
-    for(String folder:folders){
-        modules.addAll(getImplFiles(folder, ignoreFolders))
-    }
-    return modules;
-}
-
-def getImplFiles(gitFilePath, ignoreFolders) {
-    File folder = new File(gitFilePath)
-    List<String> modules = new ArrayList<>()
-    if (folder.exists()) {
-        File[] fileList = folder.listFiles()
-        if (fileList != null && fileList.size() > 0) {
-            for (File file:fileList) {
-                println("bbbbb "+file.path)
-                println("ccccc "+ignoreFolders.toString())
-                println("ddddd "+file.list())
-                if (file.isDirectory() && !(ignoreFolders.contains(file.name) || file.name.contains("plugin")) && file.list().contains("src")){
-                    println("aaaaa"+file.list().contains("src"))
-                    modules.add(':'+gitFilePath+':' + file.name)
-                }
-            }
-
-        }
-    }
-    return modules;
-
 }

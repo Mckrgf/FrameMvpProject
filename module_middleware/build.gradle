@@ -2,12 +2,13 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
-    // 直接复用全局kotlin_version变量指定插件版本，和当前Kotlin版本完全匹配
-    id 'org.jetbrains.kotlin.plugin.compose' version "$kotlin_version"
+    id 'org.jetbrains.kotlin.plugin.compose'
 }
+
 group='com.github.MCKRGF'
+
 android {
-    namespace 'com.yaobing.module_middleware'  // Add this line matching your applicationId
+    namespace 'com.yaobing.module_middleware'
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -58,8 +59,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//    api 'com.alibaba:arouter-api:1.5.1'
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 
     api 'org.greenrobot:eventbus:3.1.1'
     api 'io.reactivex.rxjava2:rxjava:2.1.16'
@@ -70,13 +69,9 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
-    //快捷列表adapter
-//    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     api 'com.blankj:utilcodex:1.31.1'
     implementation project(':module_common_view')
 
-//    implementation project(path: ':module_base:module_apt')
-//    annotationProcessor project(path: ':module_base:module_compiler')
     implementation project(path: ':module_base:module_apt')
     kapt project(path: ':module_base:module_compiler')
 
@@ -95,69 +90,7 @@ dependencies {
     api 'androidx.compose.material3:material3'
     // or skip Material Design and build directly on top of foundational components
     api 'androidx.compose.foundation:foundation'
-    // or only import the main APIs for the underlying toolkit systems，
+    // or only import the main APIs for the underlying toolkit systems,
     // such as input and measurement/layout
     api 'androidx.compose.ui:ui'
-    api 'androidx.compose.ui:ui-tooling-preview'
-
-    // Android Studio Preview support
-    api 'androidx.compose.ui:ui-tooling-preview'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-
-    // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
-
-    // Optional - Add window size utils
-    api 'androidx.compose.material3.adaptive:adaptive'
-
-    // Optional - Integration with activities
-    api 'androidx.activity:activity-compose'
-    // Optional - Integration with ViewModels
-    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5'
-    // Optional - Integration with LiveData
-    api 'androidx.compose.runtime:runtime-livedata'
-    // Optional - Integration with RxJava
-    api 'androidx.compose.runtime:runtime-rxjava2'
-    def camerax_version = "1.4.0"
-    // The following line is optional, as the core library is included indirectly by camera-camera2
-    api "androidx.camera:camera-core:${camerax_version}"
-    api "androidx.camera:camera-camera2:${camerax_version}"
-    // If you want to additionally use the CameraX Lifecycle library
-    api "androidx.camera:camera-lifecycle:${camerax_version}"
-    // If you want to additionally use the CameraX VideoCapture library
-    api "androidx.camera:camera-video:${camerax_version}"
-    // If you want to additionally use the CameraX View class
-    api "androidx.camera:camera-view:${camerax_version}"
-    // If you want to additionally add CameraX ML Kit Vision Integration
-//    implementation "androidx.camera:camera-mlkit-vision:${camerax_version}"
-    // If you want to additionally use the CameraX Extensions library
-//    implementation "androidx.camera:camera-extensions:${camerax_version}"
-
-    //这个可能和camera冲突
-//    implementation('com.github.waynell:VideoListPlayer:1.4')
-
-    api("androidx.paging:paging-runtime:$paging_version")
-
-    // alternatively - without Android dependencies for tests
-//    testImplementation("androidx.paging:paging-common:$paging_version")
-
-    // optional - RxJava2 support
-    api("androidx.paging:paging-rxjava2:$paging_version")
-
-    // optional - RxJava3 support
-    api("androidx.paging:paging-rxjava3:$paging_version")
-
-    // optional - Guava ListenableFuture support
-//    api("androidx.paging:paging-guava:$paging_version")
-
-    // optional - Jetpack Compose integration
-//    api("androidx.paging:paging-compose:1.0.0-alpha18")
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
-
-    //下拉刷新
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
-    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'
-    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'
-
 }

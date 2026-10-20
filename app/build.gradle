@@ -1,10 +1,13 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+}
+
 group='com.github.MCKRGF'
+
 android {
-    namespace 'com.yaobing.framemvpproject.app'  // Add this line matching your applicationId
+    namespace 'com.yaobing.framemvpproject.app'
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -45,8 +48,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
