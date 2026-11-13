@@ -16,4 +16,5 @@ public class BaseConstant {
     public static final String TabViewPagerActivity = "TabViewPagerActivity";
     public static final String TabViewPagerTwoActivity = "TabViewPagerTwoActivity";//update
     public static final String BottomNavActivity = "BottomNavActivity";
+    public static final String BottomNavV2Activity = "BottomNavV2Activity";
 }
